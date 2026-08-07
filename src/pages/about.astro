@@ -1,0 +1,117 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "name": "About All Hours Towing Macon GA",
+      "description": "Learn about All Hours Towing Macon GA, a locally owned towing company serving Macon, Warner Robins & Byron GA with 24/7 emergency towing and roadside assistance.",
+      "url": "https://allhourstowingmaconga.com/about"
+    },
+    {
+      "@type": "Organization",
+      "name": "All Hours Towing Macon GA",
+      "url": "https://allhourstowingmaconga.com",
+      "telephone": "+1-478-500-8118",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "450 Martin Luther King Jr. Blvd",
+        "addressLocality": "Macon",
+        "addressRegion": "GA",
+        "postalCode": "31201",
+        "addressCountry": "US"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 32.8355, "longitude": -83.6254 },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" }
+    }
+  ]
+};
+---
+
+<MainLayout
+  title="About All Hours Towing Macon GA | Local Towing Company"
+  description="All Hours Towing Macon GA is a locally owned towing company serving Macon, Warner Robins & Byron. Our professional team provides 24/7 emergency towing, roadside assistance & vehicle recovery. Call (478) 500-8118."
+  schema={aboutPageSchema}
+>
+  <section class="section bg-towing-dark text-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">About All Hours Towing Macon GA</h1>
+        <p class="text-xl text-gray-300">
+          Your Trusted 24/7 Towing Service in Middle Georgia
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Reliable Towing & Recovery in Macon, GA</h2>
+        <p class="text-towing-gray mb-4">
+          All Hours Towing Macon GA is a trusted 24/7 towing and recovery company based in Macon, Georgia. We provide fast, reliable emergency towing and roadside assistance throughout Macon, Warner Robins, Byron, and the surrounding Middle Georgia communities.
+        </p>
+        <p class="text-towing-gray mb-4">
+          Our fleet of modern tow trucks includes flatbeds, medium-duty wreckers, and specialized recovery equipment, enabling us to handle any situation — from a simple roadside lockout to complex accident recovery. Our trained operators bring professionalism and care to every call, ensuring your vehicle is handled safely from pickup to drop-off.
+        </p>
+        <p class="text-towing-gray mb-6">
+          With an average 15-minute response time from our Macon dispatch center at 450 Martin Luther King Jr. Blvd, we are strategically positioned to cover the I-75 and I-16 corridors rapidly. Our customers have rewarded our commitment to fast, courteous service with a 4.9-star rating across 127 Google reviews.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <span class="block text-3xl font-bold text-towing-red mb-2">15 min</span>
+            <span class="text-sm text-towing-gray">Average Arrival Time</span>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <span class="block text-3xl font-bold text-towing-red mb-2">24/7</span>
+            <span class="text-sm text-towing-gray">Always Available</span>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <span class="block text-3xl font-bold text-towing-red mb-2">4.9 ★</span>
+            <span class="text-sm text-towing-gray">Google Rating (127 reviews)</span>
+          </div>
+        </div>
+
+        <h2 class="text-2xl font-bold mb-4">Our Commitment</h2>
+        <p class="text-towing-gray mb-4">
+          At All Hours Towing Macon GA, we are committed to providing peace of mind to motorists in need throughout Middle Georgia. Whether you are stranded on I-75 at 3 AM, locked out of your car in downtown Macon, or need a flatbed tow for your luxury vehicle in Warner Robins, our team responds quickly and professionally.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-towing-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-towing-gray"><strong>Fast arrival</strong> — 15-minute average response time</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-towing-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-towing-gray"><strong>Careful handling</strong> — your vehicle treated like our own</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-towing-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-towing-gray"><strong>Clear communication</strong> — we explain everything before starting</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-towing-red flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-towing-gray"><strong>Fully insured</strong> — your vehicle is protected at every stage</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Area -->
+  <section class="section bg-gray-50">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Our Service Area</h2>
+        <p class="text-towing-gray mb-6">
+          Proudly serving Macon, Warner Robins, Byron, and Middle Georgia from our dispatch center at 450 Martin Luther King Jr. Blvd, Macon, GA 31201.
+        </p>
+        <a href="tel:+14785008118" class="btn-primary">Call (478) 500-8118</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

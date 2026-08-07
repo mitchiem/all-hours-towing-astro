@@ -1,0 +1,175 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import FAQSchema from '../components/FAQSchema.astro';
+
+const generalFAQs = [
+  {
+    question: "What areas do you serve for towing and roadside assistance?",
+    answer: "We serve Macon, Warner Robins, and Byron, Georgia, and surrounding Middle Georgia communities. Our central Macon location allows us to reach you fast across Bibb, Houston, and Peach counties."
+  },
+  {
+    question: "How quickly can you respond to my location?",
+    answer: "Our average response time is 15-20 minutes in the Macon metro area, and typically under 25 minutes for Warner Robins and Byron. We dispatch from our central Macon location at 450 Martin Luther King Jr. Blvd. During peak times or severe weather, response times may vary."
+  },
+  {
+    question: "What information should I provide when I call?",
+    answer: "Please provide: 1) Your exact location or nearest intersection/landmark, 2) Description of your vehicle (color, make, model), 3) What's wrong with the vehicle, 4) Your phone number in case we need to reach you. This helps us send the right equipment quickly."
+  },
+  {
+    question: "Do you offer 24/7 emergency service?",
+    answer: "Yes! We're available 24 hours a day, 7 days a week, 365 days a year. Our live dispatcher answers every call - no automated systems or callbacks. When you need help, we're here."
+  },
+  {
+    question: "What forms of payment do you accept?",
+    answer: "We accept cash, check, credit cards, debit cards, Venmo, and Zelle. We also offer accounts for commercial customers and fleet services."
+  },
+  {
+    question: "Are your technicians certified?",
+    answer: "All our technicians are fully trained, insured, and experienced. We invest in ongoing training to stay current with the latest towing and recovery techniques and safety standards."
+  },
+  {
+    question: "Can you tow my vehicle if I don't have keys?",
+    answer: "Yes, we can arrange for your vehicle to be towed even without keys. If you've locked your keys inside, we also provide lockout services to help you gain access to your vehicle."
+  },
+  {
+    question: "Do you offer long-distance towing?",
+    answer: "Yes, we provide long-distance towing throughout Georgia and can arrange transport to surrounding states. Our network of partners allows us to handle moves of any distance efficiently."
+  },
+  {
+    question: "What should I do while waiting for the tow truck?",
+    answer: "If safe, move your vehicle off the road. Turn on hazard lights. Stay inside the vehicle with seatbelt on if on a busy road. If on a highway, stand well away from the vehicle. Have your location ready to share with our dispatcher."
+  },
+  {
+    question: "Do you work with insurance companies?",
+    answer: "Yes, we work with most major insurance companies and auto clubs. We can provide the documentation needed for your insurance claim. We also offer direct billing for participating insurance providers."
+  },
+  {
+    question: "What makes All Hours Towing different from other towing companies?",
+    answer: "We're a locally owned Macon towing company with a 4.9-star rating from 127 Google reviews. Our live dispatchers answer every call 24/7, our trucks are strategically positioned for fast response, and we treat every vehicle with care. No hidden tactics, just honest service."
+  }
+];
+
+const towingFAQs = [
+  {
+    question: "Should I use a flatbed or wheel-lift tow truck?",
+    answer: "For most modern vehicles, we recommend flatbed towing as it's the safest method. Flatbeds eliminate the risk of drivetrain damage that can occur with traditional tow dollies. All-wheel drive and low-clearance vehicles should always be flatbedded."
+  },
+  {
+    question: "Can you tow my car from a parking garage?",
+    answer: "Yes, we have compact tow trucks designed for tight spaces and parking structures. Describe your situation when you call and we'll send the appropriate equipment."
+  },
+  {
+    question: "What happens if my car breaks down on the highway?",
+    answer: "If safe, move to the shoulder and turn on hazard lights. Call us with your exact location (mile marker, nearest exit). We'll dispatch the nearest available unit. For highway calls, we often arrive faster than police-initiated tows."
+  }
+];
+
+const roadsideFAQs = [
+  {
+    question: "What roadside assistance services do you offer?",
+    answer: "We offer jumpstarts, lockouts, tire changes, fuel delivery, and winching. Call dispatch; we explain the work before we start."
+  },
+  {
+    question: "Can you help if I'm locked out of my car?",
+    answer: "Yes, our technicians use professional lockout tools to gain entry without damaging your vehicle. We can typically have you back in your car within 15-20 minutes of arrival."
+  },
+  {
+    question: "Do you bring fuel if I run out of gas?",
+    answer: "Yes, we provide fuel delivery service. We'll bring enough fuel to get you to the nearest gas station. Note: We don't have diesel fuel - please specify your fuel type when calling."
+  }
+];
+
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": generalFAQs.map(f => ({ "@type": "Question", "name": f.question, "acceptedAnswer": { "@type": "Answer", "text": f.answer } }))
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://allhourstowingmaconga.com/" },
+        { "@type": "ListItem", "position": 2, "name": "FAQ" }
+      ]
+    }
+  ]
+};
+---
+
+<MainLayout 
+  title="Frequently Asked Questions | All Hours Towing Macon GA"
+  description="Find answers to common towing questions in Macon, GA. Learn about our services, response times, insurance, and what to expect when you call All Hours Towing. Call (478) 500-8118."
+  schema={faqPageSchema}
+>
+  <section class="section bg-towing-dark text-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Towing FAQ – Macon, GA</h1>
+        <p class="text-xl text-gray-300">
+          Get answers to common questions about our towing and roadside assistance services in Middle Georgia
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <FAQSchema faqs={[...generalFAQs, ...towingFAQs, ...roadsideFAQs]} />
+
+  <!-- General FAQs -->
+  <section class="section bg-white">
+    <div class="container">
+      <h2 class="text-2xl font-bold mb-8 text-center">General Towing Questions</h2>
+      <div class="max-w-3xl mx-auto space-y-6">
+        {generalFAQs.map((faq) => (
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-bold text-lg mb-2">Q: {faq.question}</h3>
+            <p class="text-towing-gray">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Towing Specific -->
+  <section class="section bg-gray-50">
+    <div class="container">
+      <h2 class="text-2xl font-bold mb-8 text-center">Towing Services FAQ</h2>
+      <div class="max-w-3xl mx-auto space-y-6">
+        {towingFAQs.map((faq) => (
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-bold text-lg mb-2">Q: {faq.question}</h3>
+            <p class="text-towing-gray">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadside Specific -->
+  <section class="section bg-white">
+    <div class="container">
+      <h2 class="text-2xl font-bold mb-8 text-center">Roadside Assistance FAQ</h2>
+      <div class="max-w-3xl mx-auto space-y-6">
+        {roadsideFAQs.map((faq) => (
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-bold text-lg mb-2">Q: {faq.question}</h3>
+            <p class="text-towing-gray">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section bg-towing-dark text-white">
+    <div class="container text-center">
+      <h2 class="text-2xl font-bold mb-4">Don't See Your Question?</h2>
+      <p class="text-gray-300 mb-6">We're here to help. Contact us anytime.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:+14785008118" class="btn-primary">Call (478) 500-8118</a>
+        <a href="tel:+14785008118" class="btn-primary bg-green-600 hover:bg-green-700">Call (478) 500-8118</a>
+        <a href="/contact" class="btn-outline border-2 border-white text-white hover:bg-white hover:text-towing-dark">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</MainLayout>

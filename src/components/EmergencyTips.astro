@@ -1,0 +1,67 @@
+---
+const tips = [
+  {
+    id: 1,
+    title: 'Move to Safety',
+    description: 'If possible, move your vehicle to the side of the road away from traffic. Turn on hazard lights and set up warning triangles if available.'
+  },
+  {
+    id: 2,
+    title: 'Stay in Your Vehicle',
+    description: 'If you\'re on a busy road or highway, it\'s safest to remain in your vehicle with seatbelts fastened while waiting for assistance.'
+  },
+  {
+    id: 3,
+    title: 'Call for Help',
+    description: 'Contact us at (478) 500-8118 for immediate assistance. Be ready to provide your location, vehicle details, and the nature of your emergency.'
+  },
+  {
+    id: 4,
+    title: 'Share Your Location',
+    description: 'Use your phone\'s GPS to share your exact location with our towing team to ensure they can find you quickly.'
+  },
+  {
+    id: 5,
+    title: 'Have Documentation Ready',
+    description: 'Prepare your driver\'s license, vehicle registration, and insurance information for when the tow truck arrives.'
+  },
+  {
+    id: 6,
+    title: 'Take Vehicle Photos',
+    description: 'If involved in an accident, take photos of your vehicle\'s condition before it\'s towed for insurance purposes.'
+  }
+];
+---
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-title">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Emergency Towing Tips</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {tips.map((tip, index) => (
+        <div class="bg-gray-50 rounded-lg p-4 border-l-4 border-towing-red flex items-start gap-3">
+          <div class="w-6 h-6 bg-towing-red rounded-full flex items-center justify-center text-white font-bold text-xs shrink-0">
+            {index + 1}
+          </div>
+          <div>
+            <h3 class="text-base font-semibold mb-1">{tip.title}</h3>
+            <p class="text-towing-gray text-sm leading-tight">{tip.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-8 bg-towing-dark text-white p-4 rounded-lg flex flex-col md:flex-row items-center gap-3">
+      <div class="shrink-0">
+        <svg class="w-8 h-8 text-towing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <div class="flex-grow text-sm">
+        <h3 class="font-bold">Safety First!</h3>
+        <p class="text-gray-300 text-xs">In case of a serious accident or dangerous situation, call 911 first.</p>
+      </div>
+      <a href="tel:+14785008118" class="shrink-0 whitespace-nowrap btn-primary text-xs py-2 px-3">Call For Help</a>
+    </div>
+  </div>
+</section>
