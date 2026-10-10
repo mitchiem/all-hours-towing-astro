@@ -1,10 +1,9 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import FAQSchema from '../../components/FAQSchema.astro';
-import ServiceSchema from '../../components/ServiceSchema.astro';
 import { services } from '../../data/services';
 
-const serviceSlugs: Record<string, { longTitle: string; subtitle: string; longDescription: string; faqs: { question: string; answer: string }[] }> = {
+const serviceSlugs: Record<string, { longTitle: string; subtitle: string; longDescription: string; sections?: { heading: string; body: string }[]; faqs: { question: string; answer: string }[] }> = {
   'roadside-assistance': {
     longTitle: "24/7 Roadside Assistance in Macon GA & Warner Robins GA | Emergency Jumpstarts, Lockouts & Tire Changes",
     subtitle: "Fast, reliable roadside assistance when you need it most. Available 24/7 across Middle Georgia and South Atlanta.",
@@ -135,13 +134,44 @@ const serviceSlugs: Record<string, { longTitle: string; subtitle: string; longDe
     ]
   },
   'macon-towing-guide': {
-    longTitle: "Macon Towing Guide | Tips, Laws & How to Choose | All Hours Towing | (478) 500-8118",
-    subtitle: "Everything you need to know about towing in Macon, GA — from laws to choosing a company.",
-    longDescription: `Choosing a towing company in Macon, Georgia isn't something most drivers think about until they're standing on the side of the road with a dead vehicle. This guide from All Hours Towing Macon GA helps you understand what to look for before an emergency happens, and what to know when you need a tow right now. First, understand Georgia's towing laws: under the Georgia Move Over Law, drivers must move over one lane when approaching any stationary vehicle displaying flashing lights—including tow trucks. Our operators appreciate when motorists give them space to work safely. Second, know your rights: in Georgia, you have the right to choose which towing company handles your vehicle unless law enforcement specifically directs otherwise. You're never required to use a company simply because they arrived first or were called by a third party. When selecting a towing company in Macon, look for these indicators of reliability: local physical address, insurance and licensing, transparent pricing, 24/7 availability with live dispatchers, and fleet quality. For insurance purposes, document the before-and-after condition of your vehicle with photos before it's loaded onto a tow truck. Keep the tow company's invoice for reimbursement. If you're in an accident, our accident recovery team can coordinate directly with your insurance carrier. Understanding Macon's local geography helps too: I-75 is the main north-south artery with heavy truck traffic; I-16 connects Macon to Savannah; I-475 is the western bypass useful for avoiding downtown congestion. Knowing your nearest cross streets or the closest exit number helps our dispatcher pinpoint your location instantly. Save our number (478) 500-8118 in your phone now—when you need a tow, you'll be glad you did.`,
+    longTitle: "Macon Towing Guide | Costs, Laws & What to Do | All Hours Towing | (478) 500-8118",
+    subtitle: "The complete Macon, GA towing guide: 2026 costs, Georgia towing laws, what to do when your car breaks down or gets towed, and how to choose a trusted towing company.",
+    longDescription: `All Hours Towing Macon GA built this guide as one honest resource for Middle Georgia drivers. Learn realistic 2026 towing costs, the Georgia laws that protect you, exactly what to do in a breakdown or impound, and how to pick a towing company you can trust. Save (478) 500-8118 before you need it.`,
+    sections: [
+      { heading: "How Much Does Towing Cost in Macon, GA in 2026?", body: `Towing prices in Macon, GA depend on distance, vehicle type, time of day, and the method used. In 2026, a standard local tow within Macon-Bibb County usually starts around $75 to $125 for hookup, and most trips finish between $100 and $175. A typical in-town tow to a shop on Eisenhower Parkway, Pio Nono Avenue, or Watson Boulevard is what most drivers pay.
+
+Mileage beyond the included distance is normally $3 to $5 per mile. After-hours, weekend, and holiday calls often add $25 to $50 because dispatch, fuel, and staffing cost more. Highway recovery on I-75, I-16, or I-475 may include a $50 to $100 recovery fee when a truck must stage safely and merge into fast traffic.
+
+Flatbed transport is the premium option and is worth it for AWD, electric, luxury, and low-clearance vehicles. Flatbed typically adds $25 to $75 over wheel-lift because every wheel stays off the pavement. Winching from a ditch or embankment adds $75 to $150 depending on how far and how steeply the vehicle must be pulled.
+
+All Hours Towing Macon GA quotes the full price before we dispatch. The number we quote is the number you pay, with no surprise hookup, fuel, or after-hours fees.` },
+      { heading: "Georgia Towing Laws Every Macon Driver Should Know", body: `The Georgia Move Over Law (O.C.G.A. 40-6-16) requires drivers to move over one lane when approaching a stationary vehicle with flashing lights, including tow trucks, and to slow down when a lane change is unsafe. This keeps operators safe on I-75, I-16, I-475, and busy Macon streets.
+
+For nonconsensual towing from private property, Georgia law sets maximum fees and requires proper signage before a vehicle can be removed. Tow companies must follow state procedures for notification, billing, and storage. When you are towed, you have the right to an itemized statement of charges.
+
+You also have the right to choose your towing company after most accidents and breakdowns unless law enforcement specifically directs the tow. You are never required to use a company simply because it arrived first or was called by a third party.` },
+      { heading: "What to Do When Your Car Breaks Down in Macon", body: `Safety first. Signal, ease to the shoulder or a parking lot, and turn on hazard lights. On I-75 or I-16, stay in the vehicle with your seatbelt fastened while waiting if traffic is moving; standing near fast traffic is more dangerous. Note the nearest exit number or mile marker.
+
+Call (478) 500-8118 and give dispatch your location, vehicle color and type, and what happened. Lock the doors and do not accept help from unverified passersby. If you can, collect insurance and registration documents before the truck arrives so the process stays simple.
+
+While you wait, take photos of the vehicle and any damage for your records. These help with insurance documentation later.` },
+      { heading: "What to Do If Your Car Was Towed", body: `First, find where it went. Ask the property owner, nearby business, or local police; most nonconsensual tows are logged with law enforcement. Collect your driver's license, registration, and proof of insurance before going to the lot.
+
+Ask for a written, itemized list of fees and compare against Georgia's maximums for nonconsensual tows. Retrieve the vehicle as soon as possible because daily storage fees accumulate. Inspect the vehicle for new damage before leaving, photograph anything unusual, and keep all receipts for insurance or a legal dispute.` },
+      { heading: "How to Choose a Reliable Towing Company in Macon", body: `A trusted Macon towing company has a real local address, proper licensing and insurance, transparent pricing, and live 24/7 dispatchers. All Hours Towing operates from 450 Martin Luther King Jr. Blvd in Macon and answers every call with a real person.
+
+Check reviews before you are stranded. All Hours Towing holds a 4.9-star rating from 127 reviews. Avoid companies that quote vague prices, route you to out-of-state call centers, or refuse to confirm the final cost before dispatch. A local operator with a maintained fleet protects your vehicle and your wallet.` },
+      { heading: "Insurance, Payment & Reimbursement for Towing", body: `Many auto policies include towing or roadside coverage. We bill directly to major carriers such as State Farm, GEICO, Progressive, Allstate, and USAA in most cases. Roadside plans through AAA, manufacturer programs like Ford Roadside and ToyotaCare, and some credit cards also reimburse towing.
+
+Keep the itemized invoice and before-and-after photos for reimbursement. Document where the vehicle was picked up and dropped off. Our receipts include the details adjusters need, and we can help walk you through the claim.` }
+    ],
     faqs: [
-      { question: "How do I choose a reliable towing company in Macon?", answer: "Look for a local physical address, proper insurance and licensing, transparent upfront pricing, 24/7 live dispatch, and a well-maintained fleet. All Hours Towing checks all these boxes." },
-      { question: "What are Georgia's towing laws I should know?", answer: "Georgia's Move Over Law requires drivers to move over for stationary vehicles with flashing lights—including tow trucks. You also have the right to choose your towing company unless law enforcement directs otherwise." },
-      { question: "What should I do immediately after a breakdown on I-75?", answer: "Move safely to the shoulder, turn on hazard lights, stay in your vehicle if on the highway, and call All Hours Towing at (478) 500-8118. Note the nearest mile marker or exit number to help us find you faster." }
+      { question: "How much does a tow cost in Macon?", answer: "A standard local tow in Macon-Bibb County usually starts around $75 to $125 for hookup, with most in-town trips finishing between $100 and $175. Flatbed, after-hours, highway recovery, and winching can add a fair premium. We always quote the full price before dispatch." },
+      { question: "What are Georgia's towing laws I should know?", answer: "The Move Over Law requires you to move over for tow trucks and other vehicles with flashing lights. Nonconsensual tows from private property have maximum fee protections and signage rules, and you generally have the right to choose your towing company unless law enforcement directs otherwise." },
+      { question: "What should I do immediately after a breakdown on I-75?", answer: "Move safely to the shoulder, turn on hazard lights, stay in your vehicle with your seatbelt on, and note the nearest mile marker or exit number. Call All Hours Towing at (478) 500-8118 and share your exact location, vehicle type, and what happened." },
+      { question: "Can I choose my own towing company after an accident?", answer: "Yes, in most cases you have the right to choose your towing company unless law enforcement specifically directs the tow. You are never required to use a company just because it arrived first or was called by a third party." },
+      { question: "What should I bring to retrieve a towed vehicle?", answer: "Bring your driver's license, registration, and proof of insurance. Request an itemized list of fees, compare against Georgia's maximums for nonconsensual tows, and retrieve the vehicle quickly to limit daily storage charges." },
+      { question: "Do you bill insurance directly for towing?", answer: "Yes. We bill directly to most major carriers including State Farm, GEICO, Progressive, Allstate, and USAA, and we provide the itemized invoices and photos adjusters need for reimbursement." }
     ]
   },
   default: {
@@ -161,25 +191,33 @@ export function getStaticPaths() {
 
 const { service } = Astro.props;
 const serviceInfo = serviceSlugs[service.slug] || serviceSlugs.default;
+
+const serviceToHubGuide: Record<string, { slug: string; title: string }> = {
+  'emergency-towing': { slug: 'emergency-towing-macon-ga', title: '24/7 Emergency Towing' },
+  '24-7-towing': { slug: 'emergency-towing-macon-ga', title: '24/7 Emergency Towing' },
+  'accident-recovery': { slug: 'emergency-towing-macon-ga', title: '24/7 Emergency Towing' },
+  'roadside-assistance': { slug: 'roadside-assistance-macon-ga', title: 'Roadside Assistance Macon GA' },
+  'car-lockout-service': { slug: 'roadside-assistance-macon-ga', title: 'Roadside Assistance Macon GA' },
+  'cheap-towing': { slug: 'cheap-towing-macon-ga', title: 'Cheap Towing Macon GA' },
+  'long-distance-towing': { slug: 'towing-services-macon-ga', title: 'Towing Services Macon GA' },
+  'flatbed-towing': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'motorcycle-towing': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'ev-towing-macon-ga': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'medium-duty-towing': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'service-areas': { slug: 'service-areas-cities-macon-ga', title: 'Service Areas & Cities' },
+  'macon-towing-guide': { slug: 'towing-company-guide-macon-ga', title: 'Towing Company Guide & Rates' },
+};
+
+const hubGuide = serviceToHubGuide[service.slug];
 const serviceSpecificTitle = `${service.title} in Macon GA | All Hours Towing | (478) 500-8118`;
 const pageTitle = serviceInfo.longTitle || serviceSpecificTitle;
-const pageDescription = `${service.fullDescription} Call All Hours Towing Macon GA at (478) 500-8118 for fast, reliable ${service.title.toLowerCase()} throughout Macon, Warner Robins & Byron.`;
-const serviceBreadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://allhourstowingmaconga.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://allhourstowingmaconga.com/services" },
-    { "@type": "ListItem", "position": 3, "name": "${service.title}" }
-  ]
-};
+const pageDescription = `${service.description} 24/7 in Macon, Warner Robins & Byron. Call (478) 500-8118.`;
 
 ---
 
 <MainLayout 
   title={pageTitle}
   description={pageDescription}
-  schema={serviceBreadcrumb}
 >
   <section class="section bg-towing-dark text-white">
     <div class="container">
@@ -228,6 +266,15 @@ const serviceBreadcrumb = {
               ))}
             </div>
           )}
+
+          {serviceInfo.sections && serviceInfo.sections.map((section) => (
+            <div class="mb-8">
+              <h2 class="text-xl md:text-2xl font-bold mb-3">{section.heading}</h2>
+              {section.body.split('\n\n').filter(p => p.trim()).map(paragraph => (
+                <p class="text-towing-gray mb-4">{paragraph.trim()}</p>
+              ))}
+            </div>
+          ))}
 
           <h3 class="text-xl font-bold mb-4 mt-8">Our Commitment to Quality</h3>
           <ul class="space-y-4 mb-8">
@@ -282,6 +329,14 @@ const serviceBreadcrumb = {
             <span>Lizella</span>
             <span>Payne City</span>
           </div>
+
+          {hubGuide && (
+            <div class="mt-8 bg-towing-dark text-white rounded-lg p-6">
+              <h3 class="text-xl font-bold mb-2">Explore the Full {hubGuide.title} Guide</h3>
+              <p class="text-gray-300 mb-4">Deep dive into costs, laws, safety tips and how to choose — all in one place.</p>
+              <a href={`/guides/${hubGuide.slug}`} class="inline-block bg-towing-red text-white font-bold px-5 py-3 rounded-lg">Read {hubGuide.title}</a>
+            </div>
+          )}
         </div>
 
         <!-- Sidebar -->
@@ -330,7 +385,6 @@ const serviceBreadcrumb = {
       <div class="container">
         <h2 class="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
         <FAQSchema faqs={serviceInfo.faqs} />
-        <ServiceSchema serviceName={service.title} serviceDescription={service.fullDescription} />
         <div class="max-w-3xl mx-auto space-y-6">
           {serviceInfo.faqs.map((faq, index) => (
             <div class="border border-gray-200 rounded-lg p-6">
@@ -373,7 +427,7 @@ const serviceBreadcrumb = {
       "addressCountry": "US"
     }
   },
-  "serviceType": "${service.title}",
+  "serviceType": service.title,
   "areaServed": [
     { "@type": "City", "name": "Macon" },
     { "@type": "City", "name": "Warner Robins" },

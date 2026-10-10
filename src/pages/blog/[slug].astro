@@ -25,7 +25,7 @@ const blogBreadcrumbSchema = {
 ---
 
 <MainLayout 
-  title={`${post.title} | All Hours Towing Blog`}
+  title={post.title}
   description={post.excerpt}
   schema={{"@graph": [articleSchema, blogBreadcrumbSchema]}}
 >
