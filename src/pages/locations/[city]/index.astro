@@ -222,7 +222,7 @@ const whyChooseContent: Record<string, string[]> = {
 };
 
 
-const localInfo = cityServiceContent[city.slug]?.localInfo || `We provide professional towing and recovery services throughout ${city.name} and surrounding areas.`;
+const localInfo = cityServiceContent[city.slug]?.localInfo || city.localInfo || `We provide professional towing and recovery services throughout ${city.name} and surrounding areas.`;
 
 const isMaconArea = city.region === 'Macon Area';
 const locationDescription = `24/7 towing in ${city.name}, GA by All Hours Towing Macon GA. Fast emergency towing & roadside assistance. Call (478) 500-8118.`;
