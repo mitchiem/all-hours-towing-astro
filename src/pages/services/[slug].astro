@@ -1,0 +1,437 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import FAQSchema from '../../components/FAQSchema.astro';
+import { services } from '../../data/services';
+
+const serviceSlugs: Record<string, { longTitle: string; subtitle: string; longDescription: string; sections?: { heading: string; body: string }[]; faqs: { question: string; answer: string }[] }> = {
+  'roadside-assistance': {
+    longTitle: "24/7 Roadside Assistance in Macon GA & Warner Robins GA | Emergency Jumpstarts, Lockouts & Tire Changes",
+    subtitle: "Fast, reliable roadside assistance when you need it most. Available 24/7 across Middle Georgia and South Atlanta.",
+    longDescription: `Breaking down in Macon is never convenient, but with All Hours Towing Macon GA, you're never alone. Our roadside assistance service covers everything from dead batteries and flat tires to keys locked in the car and empty fuel tanks. We serve the entire Middle Georgia region—Macon, Warner Robins, Byron, and beyond—with fast response times averaging 20-30 minutes. When you call (478) 500-8118, you're connected to a live dispatcher at our Macon headquarters who immediately deploys the nearest roadside technician to your exact location.Our roadside assistance technicians carry professional-grade equipment that goes far beyond what's in your trunk. For jump starts, we use high-capacity jump packs that can start everything from compact cars to heavy-duty diesel trucks without risking damage to sensitive vehicle electronics. For lockouts, we use non-destructive entry tools designed to manipulate the locking mechanism without scratching your paint, bending your window frame, or damaging weather stripping—techniques we've refined over thousands of successful unlocks across Middle Georgia. For flat tires, we can either change your tire with your spare or, if the tire is repairable, plug it on the spot so you don't have to limp to a tire shop on a donut.We service all vehicle types—cars, trucks, SUVs, motorcycles, RVs, and commercial fleet vehicles. Our technicians are trained to handle the quirks of different makes and models. Modern vehicles with push-button starts, electronic parking brakes, and transmission interlock systems require specific procedures for safe towing and roadside service, and our team stays current on manufacturer guidelines. Whether you're driving a 2024 Tesla that won't start, a Ford F-150 with a blowout on I-75, or a Honda Civic locked tight in the Ingleside neighborhood, we know exactly how to help.What makes our roadside assistance different in Macon? We pre-position trucks during high-traffic events—the Cherry Blossom Festival, Mercer University graduation, Macon Coliseum concerts—so that response times stay low even when demand spikes. We keep spare batteries and common parts on our trucks so that many problems can be solved on the spot without needing a tow. And we treat every call like an emergency, because to the person stuck on the side of the road, it is one. If you manage a fleet of delivery vans, service trucks, or company cars in the Macon area, ask about our commercial roadside assistance program—we provide priority dispatch, consolidated billing, and monthly service reports.`,
+    faqs: [
+      { question: "How quickly can you arrive for roadside assistance in Macon?", answer: "Our average response time for roadside assistance in the Macon area is 20-30 minutes. We have two strategic locations in Macon and Warner Robins to ensure fast deployment across our service area." },
+      { question: "What roadside assistance services do you offer?", answer: "We offer jumpstarts for dead batteries, lockout services (get back in your car without damage), flat tire changes, fuel delivery (if you run out of gas), and vehicle extraction from ditch or mud situations." },
+      { question: "Do you offer roadside assistance for commercial vehicles?", answer: "Yes! We provide roadside assistance for both personal and commercial vehicles, including semi-trucks, delivery vans, and fleet vehicles. Our heavy-duty equipment can handle vehicles of all sizes." },
+      { question: "Are your technicians certified for roadside assistance?", answer: "All our roadside assistance technicians are fully trained, insured, and experienced. We use professional-grade tools and follow industry best practices to ensure safe, damage-free service." },
+      { question: "Can you help if I'm stranded on I-75 or I-20?", answer: "Absolutely. We frequently assist stranded motorists on I-75, I-16, I-20, and other major highways in Middle Georgia and South Atlanta. We work closely with local law enforcement and can often reach you faster than waiting for a police-initiated tow." },
+      { question: "What should I do while waiting for roadside assistance?", answer: "Move your vehicle to a safe location if possible (off the road, away from traffic). Turn on your hazard lights. If you're on a highway, stay inside your vehicle with seatbelt on. Have your location ready to share with our dispatcher." },
+      { question: "Do you service all vehicle types for roadside assistance?", answer: "We service cars, trucks, SUVs, motorcycles, RVs, and most commercial vehicles. If you have a unique vehicle or situation, call us and we'll do our best to help." }
+    ]
+  },
+  'medium-duty-towing': {
+    longTitle: "Light & Medium Duty Towing in Macon GA | Cars, Trucks & SUVs",
+    subtitle: "Professional light and medium duty towing services for cars, SUVs, pickup trucks, and vans across Middle Georgia.",
+    longDescription: `All Hours Towing Macon GA provides professional light and medium duty towing services for passenger vehicles, SUVs, pickup trucks, cargo vans, and commercial vehicles up to 26,000 lbs. Whether you need a tow for your Honda Accord, your Ford F-150 work truck, or your Sprinter delivery van, our fleet of light and medium duty wreckers is equipped to handle the job safely and efficiently. We serve Macon, Warner Robins, Byron, and all of Middle Georgia with fast response times and experienced operators who treat every vehicle with care.Light duty towing covers most passenger vehicles—sedans, coupes, SUVs, crossovers, and small pickup trucks. For these vehicles, we typically deploy flatbed trucks because keeping all four wheels off the ground eliminates risk to the drivetrain, suspension, and tires. This is especially important in Macon, where potholes on older streets like Vineville Avenue or Riverside Drive can cause a wheel-lifted vehicle to bottom out or scrape. We use soft straps to secure vehicles to the bed, and every flatbed is equipped with a hydraulic tilt mechanism that creates a gentle loading angle for low-clearance cars.Medium duty towing covers larger vehicles: box trucks, delivery vans, RVs, cargo vans, and commercial trucks with a gross vehicle weight rating up to 26,000 lbs. These vehicles require more powerful wreckers with higher-capacity booms, winches, and stabilizing outriggers. Our medium duty wrecker fleet is maintained in-house at our Macon facility, with regular hydraulic system checks, cable inspections, and brake testing to ensure safe operation under load. We serve Macon's commercial corridors—Eisenhower Parkway, Pio Nono Avenue, Riverside Drive—where delivery vehicles and service trucks frequently need recovery.For business customers in Macon and Warner Robins, we offer commercial towing accounts with priority dispatch, consolidated monthly billing, and documentation suitable for fleet maintenance records and insurance claims. We work with local dealerships, repair shops, and body shops to coordinate transport directly to their service bays. And we understand that a downed commercial vehicle means lost revenue, so we prioritize commercial dispatches and provide accurate ETAs so you can communicate with your customers. Whether you're a plumbing company with a van stuck at a job site on Gray Highway, a caterer with a delivery truck that won't start on Watson Boulevard, or a contractor with a pickup that needs transport from Fort Valley to a Macon repair shop, call (478) 500-8118 for immediate assistance.`,
+    faqs: [
+      { question: "What vehicles qualify for light duty towing?", answer: "Light duty towing covers most passenger vehicles including cars, SUVs, crossovers, and small pickup trucks. Medium duty covers larger trucks, cargo vans, and vehicles up to 26,000 lbs." },
+      { question: "Do you use flatbed tow trucks?", answer: "Yes, we primarily use flatbed tow trucks which are the safest method for modern vehicles. Flatbed towing eliminates the risk of damage to the vehicle's drivetrain that can occur with traditional tow dollies." },
+      { question: "Can you tow my car from a parking garage or tight space?", answer: "Our fleet includes compact tow trucks specifically designed for tight spaces, parking garages, and areas with limited access. Describe your situation when you call and we'll send appropriate equipment." },
+      { question: "Do you offer long-distance towing services?", answer: "Yes, we provide long-distance towing throughout Georgia and can arrange transport to surrounding states. Our fleet and partnerships allow us to handle moves of any distance efficiently." },
+      { question: "What areas do you serve for light duty towing?", answer: "We serve Macon, Warner Robins, Milledgeville, Warner Robins, Conyers, Monroe, Perry, Gray, and all surrounding Middle Georgia and South Atlanta communities." }
+    ]
+  },
+  'motorcycle-towing': {
+    longTitle: "Motorcycle Towing in Macon GA | Safe & Professional Bike Transport",
+    subtitle: "Specialized motorcycle towing with proper equipment. Your bike deserves expert care.",
+    longDescription: `Motorcycles deserve specialized care during transport, and All Hours Towing Macon GA has the equipment and expertise to tow your bike safely anywhere in Middle Georgia. Unlike cars, motorcycles can't simply be hooked up and pulled—their two-wheel design, exposed components, and precise suspension geometry require purpose-built towing equipment and trained operators who understand motorcycle dynamics. We use dedicated motorcycle transport trailers, wheel chocks, soft straps, and flatbed trucks to ensure your bike arrives exactly as it left—upright, undamaged, and ready to ride.Our motorcycle towing service covers all types of bikes common on Middle Georgia roads: cruisers like Harley-Davidsons and Indian motorcycles that are popular along the scenic routes around Macon; sport bikes like Yamahas and Kawasakis that frequent the twisty roads near Lake Tobesofkee; touring bikes like Honda Gold Wings that carry riders on long-distance trips through Georgia; and adventure bikes like BMW GS models that venture onto the fire roads and trails of the Piedmont region. We also handle trikes, Can-Am Spyders, and custom choppers—each requiring slightly different securing techniques.When you call (478) 500-8118 for motorcycle towing in Macon, we dispatch a truck specifically equipped for bike transport. Our operators use soft nylon straps that won't scratch chrome, paint, or powder-coated surfaces. Bikes are secured at multiple points—typically the triple tree, frame, and rear wheel—with the suspension slightly compressed to prevent bouncing during transport. The bike is never laid on its side, never dragged, and never secured with chains or metal hooks that could damage finishes. For flatbed transport, we use a dedicated motorcycle loading ramp with a wheel chock at the front of the bed, and the bike is strapped upright with the kickstand up to prevent stress on the stand.We serve Macon's motorcycle community in specific ways that matter to riders. We can tow your bike to any motorcycle shop in the area—Macon Motor Sports, Warner Robins Honda, or your preferred independent mechanic. We're available 24/7 for roadside breakdowns, which matters when your bike quits on a Saturday afternoon ride or a late-night return from Bike Week in Daytona. And we understand that a motorcycle is more than transportation—it's an investment of money, time, and passion. When you trust your bike to All Hours Towing, you're trusting a team of riders and mechanics who care about motorcycles the way you do.`,
+    faqs: [
+      { question: "Why can't I just ride my motorcycle to the shop?", answer: "If your motorcycle won't start, has a mechanical issue, or is damaged, riding it can be dangerous and cause further damage. Professional motorcycle towing ensures safe transport without risk to you or your bike." },
+      { question: "What equipment do you use for motorcycle towing?", answer: "We use dedicated motorcycle transport trailers and wheel-lift equipment specifically designed for motorcycles. Our team is trained in proper motorcycle loading and securing techniques." },
+    ]
+  },
+  'accident-recovery': {
+    longTitle: "Accident Recovery in Macon GA & Warner Robins GA | Post-Collision Towing & Scene Management",
+    subtitle: "Professional accident recovery services across Middle Georgia and South Atlanta. Scene safety, vehicle extraction, and insurance documentation.",
+    longDescription: `When an accident happens in Macon, Warner Robins, or anywhere in Middle Georgia, the moments after impact are chaotic and stressful. All Hours Towing Macon GA provides professional accident recovery services that go beyond simply towing your damaged vehicle. We manage the entire post-collision process: safe vehicle extraction, scene cleanup, law enforcement coordination, insurance documentation, and transport to your preferred repair shop or storage facility. Our team has handled everything from minor fender-benders on Eisenhower Parkway to multi-vehicle collisions on I-75, and we bring the same professionalism and care to every scene.Our accident recovery fleet includes heavy-duty wreckers with rotating booms, multiple winches, and stabilizing outriggers capable of recovering vehicles from ditches, embankments, medians, and any off-road position. We carry scene safety equipment—LED warning beacons, traffic cones, reflective triangles, high-visibility vests, and spill containment materials—to manage the site safely while we work. Our operators are trained in vehicle stabilization techniques that prevent secondary movement during extraction, which is critical when a vehicle is precariously positioned or has suffered structural damage.We work closely with local law enforcement agencies across Middle Georgia, including Macon-Bibb County Sheriff's Office, Warner Robins Police Department, Georgia State Patrol, and Peach County Sheriff's Office. When you call (478) 500-8118 from an accident scene, we coordinate with the responding officers to ensure our recovery operation aligns with their investigation needs. We understand that accident scenes are evidence, and we handle damaged vehicles in a way that preserves the forensic value for insurance adjusters and legal proceedings if needed.For insurance purposes, we provide comprehensive documentation of every recovery: timestamped scene photographs, detailed tow invoices, itemized equipment used, and a narrative summary of the recovery operation. We work with all major insurance carriers operating in Georgia—State Farm, GEICO, Progressive, Allstate, USAA, Liberty Mutual, and many others—and can often bill them directly so you don't have to front the towing cost at an already difficult time. We can tow your vehicle to any destination you choose: your preferred collision repair shop in Macon (such as Caliber Collision, Gerber Collision, or Five Star Collision), your dealership's body shop, your home, or our secure storage yard until insurance arrangements are finalized. If you're unsure where to take your vehicle, we can recommend trusted local shops based on your vehicle's make and the extent of damage.`,
+    faqs: [
+      { question: "What should I do immediately after an accident?", answer: "First, check yourself and passengers for injuries—call 911 if anyone is hurt. If it's safe and vehicles are drivable, move to the shoulder and turn on hazard lights. Then call All Hours Towing at (478) 500-8118. Our team coordinates with law enforcement and handles vehicle recovery while you focus on your wellbeing." },
+      { question: "Can you recover my vehicle from any location?", answer: "Yes, we recover vehicles from ditches, embankments, medians, guardrails, and any off-road location. Our winching equipment and trained technicians can safely extract vehicles without causing additional damage. We serve Macon, Warner Robins, Warner Robins, and throughout Middle Georgia." },
+      { question: "Do you work with insurance companies for accident recovery?", answer: "Yes, we work with all major insurance carriers. We provide detailed invoices, scene photographs, and documentation suitable for insurance claims. We can bill your insurance directly in many cases and help guide you through the claims process." },
+      { question: "How quickly can you arrive at an accident scene?", answer: "Our average response time to accident scenes is 20-30 minutes across our service area. We have two locations—Macon and Warner Robins—staged strategically near major highways including I-75, I-16, I-20, and I-475 for rapid deployment." },
+      { question: "What equipment do you use for accident recovery?", answer: "We deploy flatbed trucks for damaged vehicles, heavy winches for off-road recoveries, and scene safety equipment including cones, warning triangles, and spill containment materials. Our technicians are trained in accident scene management and carry appropriate PPE." },
+      { question: "Can you tow my vehicle to my preferred repair shop?", answer: "Absolutely. You have the right to choose where your vehicle is taken. Tell our driver your preferred repair shop, dealership, or storage location. If you're unsure, we can recommend trusted local shops that work with all major insurance carriers." }
+    ]
+  },
+  'emergency-towing': {
+    longTitle: "Emergency Towing in Macon GA | 24/7 Response | All Hours Towing | (478) 500-8118",
+    subtitle: "Stranded? Our emergency towing team reaches you within 15-20 minutes anywhere in Macon, Warner Robins & Byron. Available 24/7/365.",
+    longDescription: `When you're stranded on the side of I-75 near Macon at midnight, you need a towing company that answers the phone immediately and arrives fast. At All Hours Towing Macon GA, we take emergency response seriously. Our dispatch center is staffed 24/7 by real people—not answering machines—who understand the urgency of your situation and coordinate the nearest available truck to your location. From our central hub at 450 Martin Luther King Jr. Blvd in downtown Macon, we stage trucks near key interchanges including I-75 exits 164-171, I-16 exit 1A, and I-475 exits 3-5, ensuring we can reach you anywhere in Macon-Bibb County within 15-20 minutes.Our emergency towing fleet includes late-model flatbed trucks, wheel-lift wreckers, and heavy-duty recovery vehicles equipped with winches, air cushions, and scene safety gear. Every truck carries traffic cones, warning triangles, high-visibility LED beacons, and spill containment materials to manage accident scenes safely until law enforcement arrives. Our operators are trained in vehicle extrication techniques that prevent secondary damage—something that matters when your car is already in a vulnerable position.What sets All Hours Towing apart in Macon is our local knowledge. We know that the I-75/I-16 interchange (exit 165) becomes a parking lot during rush hour and that alternative routes like Riverside Drive or Broadway can cut response time in half. We know that the Ocmulgee River lowlands flood after heavy rain and that vehicles stranded on soft ground need careful winching, not brute force. We know the neighborhoods—from Ingleside to Vineville, from Payne City to Lizella—and we know how to navigate narrow historic streets with a full-size wrecker. This isn't generic towing; this is Macon-specific emergency response honed over three generations of service.When you call (478) 500-8118, you'll speak directly to a dispatcher who can see exactly which trucks are available and how far they are from your location. We don't route calls through out-of-state call centers. We don't put you on hold for five minutes while we figure out who's available. We answer, we dispatch, and we stay on the line if you need reassurance until the driver arrives. For emergencies on major highways like I-75, I-16, I-20, and I-475, we coordinate with Georgia State Patrol and local law enforcement to ensure safe scene management. We also work with all major insurance carriers—State Farm, GEICO, Progressive, Allstate, USAA, and others—and can bill them directly in most cases, so you don't have to pay out of pocket at a stressful moment.`,
+    faqs: [
+      { question: "How fast can you reach me for emergency towing in Macon?", answer: "Our average emergency response time in Macon is 15-20 minutes. We dispatch immediately from 450 Martin Luther King Jr. Blvd and have trucks staged near I-75 and I-16 for rapid deployment." },
+      { question: "What areas do you cover for emergency towing?", answer: "We cover all of Macon, Warner Robins, Byron, and surrounding Middle Georgia communities. Our two locations (Macon and Warner Robins) ensure quick response anywhere in our service area." },
+      { question: "What types of emergencies do you respond to?", answer: "We respond to all vehicle emergencies including breakdowns, collisions, vehicles in ditches, rollovers, and any situation where your vehicle needs immediate recovery. Our team coordinates with law enforcement when needed." }
+    ]
+  },
+  'flatbed-towing': {
+    longTitle: "Flatbed Towing in Macon GA | Damage-Free Transport | All Hours Towing | (478) 500-8118",
+    subtitle: "Safest towing method for AWD, luxury, and low-clearance vehicles in Macon, Warner Robins & Byron.",
+    longDescription: `Flatbed towing is the gold standard for vehicle transport, and at All Hours Towing Macon GA, we operate a fleet of modern flatbed trucks ready to protect your vehicle during transport across Macon, Warner Robins, Byron, and all of Middle Georgia. Whether you drive an all-wheel-drive Subaru, a low-slung Corvette, a lifted Jeep, or a luxury Mercedes-Benz, our flatbed service ensures all four wheels stay off the ground—eliminating the risk of drivetrain, transmission, and tire damage that can occur with traditional wheel-lift towing.Why does flatbed towing matter specifically in Macon? The city's mix of historic neighborhoods, modern developments, and major highways creates unique towing challenges. In downtown Macon's older districts, narrow streets and tight parking garages demand a flatbed operator who can position the truck precisely without blocking traffic or scraping adjacent vehicles. On I-75 and I-475, where speeds are high and shoulders are narrow, flatbed loading is faster and safer than wheel-lift hookups because the entire vehicle is winched onto the bed from the rear, keeping the operator and your car out of the travel lanes. In rural areas around Lizella and Payne City, where dirt roads and soft shoulders are common, a flatbed truck's low-angle ramp prevents the scraping and bottoming out that can occur with traditional tow trucks.Our flatbed operators handle every vehicle as if it were their own. We use soft straps—never chains—to secure your car to the bed, protecting the suspension components and undercarriage. For vehicles with exceptionally low ground clearance, we use approach ramps and wooden blocks to create a gentler loading angle. For AWD and 4WD vehicles, we confirm that all four wheels are properly secured and that the vehicle is transported in neutral without any wheels rotating—critical for protecting the transfer case and differentials.Beyond everyday transport, our flatbed trucks serve Macon's automotive community in specialized ways. We work with local dealerships like Butler Toyota, Five Star Chevrolet, and Hutchinson Kia to transport new and used inventory between lots. We assist Macon's collision repair shops by delivering damaged vehicles directly to body shop bays. We help classic car collectors move vintage vehicles to and from shows like the annual Cherry Blossom Festival car exhibition. And for residents relocating within Georgia or to neighboring states, our flatbed service provides a safe, insured long-distance transport option. Call (478) 500-8118 anytime to discuss your flatbed towing needs—whether it's across town or across the state, we'll handle your vehicle with the care it deserves.`,
+    faqs: [
+      { question: "Why is flatbed towing safer for my vehicle?", answer: "Flatbed towing keeps all four wheels off the ground, eliminating wear on your vehicle's drivetrain, transmission, and tires. It's the recommended method for AWD vehicles, luxury cars, sports cars, and any vehicle with low ground clearance." },
+      { question: "Do you offer flatbed towing in Warner Robins and Byron?", answer: "Yes, our flatbed trucks serve the entire Middle Georgia area including Warner Robins and Byron. We can reach you quickly and transport your vehicle safely to any destination." },
+      { question: "Can a flatbed tow truck access tight spaces in Macon?", answer: "Our flatbed operators are experienced in navigating Macon's residential streets, parking decks, and tight commercial areas. If access is limited, we'll assess the situation and find the safest approach for your vehicle." }
+    ]
+  },
+  'cheap-towing': {
+    longTitle: "Cheap Towing in Macon GA | Affordable Rates | All Hours Towing | (478) 500-8118",
+    subtitle: "Reliable towing at fair prices. Same professional service throughout Macon, Warner Robins & Byron without breaking the bank.",
+    longDescription: `All Hours Towing Macon GA believes that reliable, professional towing shouldn't drain your wallet. Our cheap towing service delivers the same quality equipment, trained operators, and fast response times as any of our premium services—at a fair, transparent rate that fits your budget. We serve Macon, Warner Robins, Byron, and surrounding Middle Georgia communities with affordable towing options that don't compromise on safety, professionalism, or speed.What makes our cheap towing genuinely affordable, not just cheap? First, we operate efficiently. Our central dispatch location at 450 Martin Luther King Jr. Blvd in Macon minimizes deadhead miles—the distance a truck travels empty to reach a customer—which keeps fuel costs down and savings pass to you. Second, we maintain our own fleet in-house, so we're not paying dealership repair rates that get baked into towing fees. Third, we provide upfront pricing: when you call (478) 500-8118, we quote your tow before we dispatch, and that quote is the price you pay—no hidden hookup fees, no mileage surprises, no after-hours surcharges.Local tows within Macon-Bibb County start at our most competitive rate. Typical scenarios include moving a non-running car from your driveway to a repair shop, transporting a vehicle you've just purchased from a private seller, or relocating a car from one storage location to another. For longer distances—say, from Macon to Atlanta or Warner Robins to Savannah—we can often arrange transport at rates competitive with any provider in Middle Georgia, especially for flatbed transport where your vehicle's safety is worth the slight premium over wheel-lift towing.We also help Macon residents save through insurance coordination. Many auto insurance policies include towing coverage, and we bill directly to most major carriers—State Farm, GEICO, Progressive, Allstate, USAA, and others. If you have roadside assistance through AAA, your carrier's app, or a manufacturer program like Ford Roadside or ToyotaCare, we can often work within those networks. Our team is experienced at navigating insurance claim processes and can provide the documentation, photographs, and invoices your carrier needs to process reimbursement. For customers facing genuine financial hardship—seniors on fixed incomes, single parents, students at Mercer University or Middle Georgia State—call us directly and we'll discuss options; we've been part of this community for three generations and we believe in taking care of our neighbors.`,
+    faqs: [
+      { question: "How much does towing cost in Macon?", answer: "Our rates are competitive and transparent. Local tows within Macon start at an affordable base rate. We provide upfront pricing before dispatch so there are no surprises on your bill." },
+      { question: "Do you offer any discounts on towing?", answer: "We offer fair, competitive rates every day. We also work with most major insurance carriers and can often bill them directly, reducing your out-of-pocket cost. AAA and other roadside assistance members may have coverage through their plans. Call us to discuss your situation." },
+      { question: "Is cheap towing less reliable?", answer: "Not at all. Our affordable rates come with the same professional equipment, trained operators, and fast response times as any of our services. We believe everyone deserves access to quality towing without excessive pricing." }
+    ]
+  },
+  'car-lockout-service': {
+    longTitle: "Car Lockout Service in Macon GA | Fast Unlock | All Hours Towing | (478) 500-8118",
+    subtitle: "Locked out of your car? Our technicians arrive fast across Macon, Warner Robins & Byron with professional unlock tools.",
+    longDescription: `Locked your keys in the car? It happens more often than you'd think—especially in Macon, where summer heat and winter cold can create exactly the kind of rushed, distracted moments that lead to a lockout. All Hours Towing Macon GA provides fast, professional car lockout service throughout Macon, Warner Robins, Byron, and all of Middle Georgia. Our technicians arrive quickly with professional-grade lockout tools, and most unlocks are completed within minutes of our arrival.Our lockout specialists use a combination of long-reach tools, inflatable wedges, and specialized lock manipulation devices to access your vehicle without causing damage. We don't use coat hangers, slim jims, or other improvised tools that can bend window tracks, tear weather stripping, scratch paint, or damage your door's internal mechanism. Every tool in our kit is purpose-built for automotive lockout work, and our technicians undergo regular training to stay current with the security systems on newer vehicles.Modern vehicles present unique lockout challenges that require specialized knowledge. Push-button start systems can sometimes create a "ghost lock" where the key fob is inside the vehicle but the doors lock anyway due to a sensor error. Vehicles with frameless windows (like many coupes and convertibles) require careful wedge placement to avoid cracking the glass. And vehicles with deadlocked doors—common on European makes like BMW, Mercedes, and Audi—require a completely different approach than standard pin-tumbler locks. Our team has unlocked every major make and model on the road in Middle Georgia, and we'll arrive at your location with the right equipment for your specific vehicle.Our response times for lockouts average 20-25 minutes across our service area. We keep our technicians strategically positioned in Macon (near downtown, Ingleside, and the Eisenhower Parkway corridor) and Warner Robins (near Watson Boulevard and Robins AFB gates) to minimize travel time. We serve residential lockouts (driveways, apartment complexes, gated communities), commercial lockouts (parking lots at the Macon Mall, Riverside Drive shopping centers, Warner Robins Galleria), and highway lockouts (shoulders of I-75, I-16, I-475). If you're locked out at night, in the rain, or in a location that feels unsafe, tell our dispatcher when you call—we'll prioritize your call and stay on the phone with you until the technician arrives. Call (478) 500-8118 anytime for immediate lockout assistance.`,
+    faqs: [
+      { question: "How quickly can you unlock my car in Macon?", answer: "Our average response time for car lockouts in Macon is 20-25 minutes. We keep our technicians strategically positioned to cover the entire Macon area quickly." },
+      { question: "Will you damage my car during a lockout service?", answer: "No. Our technicians use professional-grade lockout tools and techniques designed to unlock vehicles without damaging the door, window trim, paint, or locking mechanisms. We've successfully unlocked thousands of vehicles across Middle Georgia." },
+      { question: "Can you unlock any vehicle make and model?", answer: "We can unlock most makes and models including Ford, Chevrolet, Toyota, Honda, Nissan, BMW, Mercedes, and more. Modern vehicles with advanced electronic locks may require specialized approaches, and our team is trained for those situations as well." }
+    ]
+  },
+  '24-7-towing': {
+    longTitle: "24/7 Towing in Macon GA | Round-the-Clock Service | All Hours Towing | (478) 500-8118",
+    subtitle: "Never closed. Towing and roadside assistance 24 hours a day, 7 days a week throughout Macon, Warner Robins & Byron.",
+    longDescription: `All Hours Towing Macon GA earned its name honestly: we are open 24 hours a day, 7 days a week, 365 days a year—including every holiday—because vehicle emergencies don't follow a calendar. Whether your battery dies on Christmas morning, you slide into a ditch during a Thanksgiving rainstorm, or your transmission fails at 3 AM on a Tuesday, our dispatchers are awake, our trucks are fueled, and our operators are ready to roll. When you call (478) 500-8118, a real person answers from our Macon dispatch center—not a voicemail system, not an answering service, and certainly not an out-of-state call center that doesn't know Macon from Marietta.Our 24/7 commitment is built on infrastructure and staffing, not marketing. We maintain a rotating crew of certified operators who work staggered shifts, ensuring that at any hour of the day or night, at least two fully equipped trucks are on active duty and ready to dispatch. Our fleet is stored in a secured, climate-controlled facility with 24-hour access, and every truck undergoes a pre-shift inspection before it leaves the yard. We stock our trucks with spare batteries, fuel cans, tire-changing equipment, and lockout tools so that many roadside issues can be resolved on the spot without requiring a tow.Nighttime towing in Middle Georgia presents specific challenges that our team is specifically trained to handle. Reduced visibility on rural roads like GA-49, US-41, and the many county routes between Macon and surrounding towns requires careful scene lighting and enhanced safety protocols. Wildlife collisions—deer, mostly, but occasionally larger animals on the rural stretches of I-16 and I-75—require specialized winching and recovery techniques. And winter weather, while rare in Georgia, does happen; when ice coats the bridges on I-75 and I-475, our trucks are staged at strategic ramps so that we can reach accidents before the roads become impassable.We serve all of Macon, Warner Robins, Byron, and the surrounding communities with the same 24/7 availability. Our two locations—primary dispatch in Macon and a satellite staging area in Warner Robins—ensure that a truck is never more than 20-25 minutes from any point in our service area, regardless of the hour. For commercial accounts, we offer guaranteed 24/7 service level agreements with documented response times, priority queuing, and monthly performance reports. If your business depends on vehicle uptime—delivery fleets, service vans, construction trucks—we can design a towing and roadside plan that keeps you moving 24/7.`,
+    faqs: [
+      { question: "Do you really answer the phone at 3 AM?", answer: "Yes! We have live dispatchers answering calls 24/7/365 at (478) 500-8118. You'll always speak to a real person, not a voicemail or answering service. Our trucks are ready to roll regardless of the time." },
+      { question: "Are your rates higher at night or on holidays?", answer: "No. Our 24/7 towing rates are consistent regardless of the time or day. We charge the same fair rates whether it's Tuesday at noon or Christmas morning at 3 AM." },
+      { question: "What areas do you cover with 24/7 service?", answer: "We provide round-the-clock towing coverage throughout Macon, Warner Robins, Byron, and all of Middle Georgia. Our two locations ensure a truck is always nearby when you need one most." }
+    ]
+  },
+  'long-distance-towing': {
+    longTitle: "Long Distance Towing in Macon GA | Interstate & Cross-State Vehicle Transport | (478) 500-8118",
+    subtitle: "Reliable long-distance vehicle transport throughout Georgia and to neighboring states. Safe, insured, and professional from our Macon hub.",
+    longDescription: `When you need a vehicle transported across Georgia or to a neighboring state, All Hours Towing Macon GA provides reliable long distance towing services from our central Macon hub. Our well-maintained fleet and experienced drivers ensure your vehicle arrives safely at its destination, whether you're relocating to Atlanta, heading to Savannah, moving to Florida, or need a car shipped to Alabama or the Carolinas. Long-distance towing requires different planning than a local tow: we account for fuel stops, driver rest requirements, traffic patterns on I-75 and I-16, and weather conditions along the route. Our dispatchers provide accurate ETAs and keep you updated throughout the journey. We can transport cars, trucks, SUVs, motorcycles, and light commercial vehicles on our flatbed trailers—the safest method for highway-speed transport. For customers selling a vehicle to an out-of-town buyer, we offer direct delivery to the buyer's location. For college students moving between Macon and campuses like UGA in Athens, Georgia Southern in Statesboro, or Georgia Tech in Atlanta, we provide affordable student transport rates. Every long-distance tow includes insurance coverage during transit, and we document the vehicle's condition before and after transport. Call (478) 500-8118 for a long-distance towing quote—we'll provide upfront pricing with no hidden mileage fees.`,
+    faqs: [
+      { question: "How far can you tow my vehicle from Macon?", answer: "We provide long-distance towing throughout Georgia and can arrange transport to Alabama, Florida, South Carolina, Tennessee, and beyond. Our fleet handles trips of any distance with care and reliability." },
+      { question: "How much does long-distance towing cost?", answer: "Long-distance towing rates depend on distance, vehicle type, and transport method. We provide upfront, no-surprise pricing before dispatch. Call (478) 500-8118 for a free quote." },
+      { question: "Is my vehicle insured during long-distance transport?", answer: "Yes, all our long-distance tows include cargo insurance coverage. We document your vehicle's condition before and after transport for your peace of mind." },
+      { question: "Can I ship a non-running vehicle long-distance?", answer: "Yes, we can transport non-running vehicles. Our flatbed trucks can winch a vehicle onto the bed even if it won't start. Just let us know the vehicle's condition when you call." }
+    ]
+  },
+  'ev-towing-macon-ga': {
+    longTitle: "EV Towing in Macon GA | Tesla, Ford, Hyundai, Kia Electric Vehicle Towing | (478) 500-8118",
+    subtitle: "Specialized electric vehicle towing for all makes and models. Flatbed transport that protects your EV's drivetrain and battery.",
+    longDescription: `Electric vehicles represent the fastest-growing segment of vehicles on Macon's roads, but they require specialized towing knowledge that many traditional towing companies lack. All Hours Towing Macon GA is trained and equipped for safe EV towing, using flatbed trucks exclusively for electric vehicle transport. Most EVs—including all Tesla models, Ford Mustang Mach-E, Hyundai Ioniq 5/6, Kia EV6, Chevrolet Bolt, Nissan Leaf, and Rivian trucks—cannot have any wheels on the ground during towing without risking severe damage to their electric motors, regenerative braking systems, and high-voltage battery packs. Our flatbed trucks keep all four wheels elevated, eliminating any risk to the drivetrain. We serve EV owners throughout Macon, Warner Robins, and Byron with the same 24/7 availability and rapid response times as our conventional towing services. Our operators understand the additional procedures required for EVs: how to put a Tesla into tow mode, how to locate the manual door releases on vehicles with electronic door handles (critical during lockouts), and how to safely winch an EV onto a flatbed without damaging the battery enclosure or underbody aero panels. We also understand that EV drivers in Macon may need towing to specific destinations: the Tesla Supercharger station on Tom Hill Sr. Blvd, the Electrify America stations at the Macon Mall, or the growing network of ChargePoint and EVgo chargers around Middle Georgia. If your EV runs out of charge on I-75 between Macon and Atlanta, we can tow you directly to the nearest compatible charger rather than a random repair shop. For EV owners with home charging setups, we can deliver your vehicle directly to your driveway and even help navigate tight garage clearances. As Macon's newest car dealerships bring more EVs to Middle Georgia, All Hours Towing is your local EV towing specialist.`,
+    faqs: [
+      { question: "Can all EVs be towed with a regular tow truck?", answer: "No—most EVs must be transported on a flatbed with all four wheels off the ground. Towing an EV with wheels on the road can severely damage the electric motors and battery. All Hours Towing uses flatbed trucks for all EV towing." },
+      { question: "Do you tow Teslas in Macon?", answer: "Yes, we tow all Tesla models (Model S, 3, X, Y, Cybertruck) throughout Macon, Warner Robins, and Byron. We know how to put Teslas into tow mode and use flatbed transport for safe delivery." },
+      { question: "What if my EV runs out of charge on I-75?", answer: "We'll dispatch a flatbed truck to transport your EV to the nearest compatible charging station—whether that's a Supercharger, Electrify America, or other network in the Macon area." }
+    ]
+  },
+  'service-areas': {
+    longTitle: "Towing Service Areas in Middle Georgia | Macon, Warner Robins, Byron & Beyond | (478) 500-8118",
+    subtitle: "Serving Macon, Warner Robins, Byron, and Middle Georgia with fast towing and roadside assistance.",
+    longDescription: `All Hours Towing Macon GA proudly serves a broad swath of Middle Georgia from our headquarters at 450 Martin Luther King Jr. Blvd in downtown Macon. Our primary service area includes Macon-Bibb County, Warner Robins and Houston County, Byron and Peach County, plus the surrounding communities that make up the economic heart of central Georgia. We provide 24/7 towing and roadside assistance along all major transportation corridors: I-75 from exits 144 to 185, I-16 from Macon eastward toward Dublin and Savannah, I-475 forming the western bypass of Macon, and state routes including GA-49, GA-96, US-41, GA-247, and GA-74. Our two-location strategy—primary dispatch in Macon and satellite staging in Warner Robins—ensures that no point in our coverage area is more than 25-30 minutes from a truck. From these bases, we serve cities and towns including Milledgeville, Forsyth, Fort Valley, Perry, Gray, and smaller communities like Lizella, Payne City, Centerville, Bonaire, and Kathleen. We also extend service to the South Atlanta suburbs—Conyers, Covington, and Monroe—and can arrange long-distance transport throughout Georgia and to neighboring states. Whatever the location and whatever the situation, our dispatchers at (478) 500-8118 know the roads, know the response times, and know exactly which truck to send. We're not a nationwide call center dispatching random contractors—we're your neighbors with three generations of Middle Georgia towing experience.`,
+    faqs: [
+      { question: "What areas do you serve in Middle Georgia?", answer: "We serve Macon, Warner Robins, Byron, Milledgeville, Forsyth, Fort Valley, Perry, Gray, and all surrounding communities. Our trucks are staged for fast response throughout the region." },
+      { question: "How far will you travel for a tow?", answer: "We provide towing throughout Middle Georgia and can arrange long-distance transport throughout Georgia and to neighboring states. Call for specific distance inquiries." },
+      { question: "Do you serve the South Atlanta area?", answer: "Yes—we extend service to Conyers, Covington, Monroe, and surrounding South Atlanta communities. Our Warner Robins staging area keeps response times low for these areas." }
+    ]
+  },
+  'macon-towing-guide': {
+    longTitle: "Macon Towing Guide | Costs, Laws & What to Do | All Hours Towing | (478) 500-8118",
+    subtitle: "The complete Macon, GA towing guide: 2026 costs, Georgia towing laws, what to do when your car breaks down or gets towed, and how to choose a trusted towing company.",
+    longDescription: `All Hours Towing Macon GA built this guide as one honest resource for Middle Georgia drivers. Learn realistic 2026 towing costs, the Georgia laws that protect you, exactly what to do in a breakdown or impound, and how to pick a towing company you can trust. Save (478) 500-8118 before you need it.`,
+    sections: [
+      { heading: "How Much Does Towing Cost in Macon, GA in 2026?", body: `Towing prices in Macon, GA depend on distance, vehicle type, time of day, and the method used. In 2026, a standard local tow within Macon-Bibb County usually starts around $75 to $125 for hookup, and most trips finish between $100 and $175. A typical in-town tow to a shop on Eisenhower Parkway, Pio Nono Avenue, or Watson Boulevard is what most drivers pay.
+
+Mileage beyond the included distance is normally $3 to $5 per mile. After-hours, weekend, and holiday calls often add $25 to $50 because dispatch, fuel, and staffing cost more. Highway recovery on I-75, I-16, or I-475 may include a $50 to $100 recovery fee when a truck must stage safely and merge into fast traffic.
+
+Flatbed transport is the premium option and is worth it for AWD, electric, luxury, and low-clearance vehicles. Flatbed typically adds $25 to $75 over wheel-lift because every wheel stays off the pavement. Winching from a ditch or embankment adds $75 to $150 depending on how far and how steeply the vehicle must be pulled.
+
+All Hours Towing Macon GA quotes the full price before we dispatch. The number we quote is the number you pay, with no surprise hookup, fuel, or after-hours fees.` },
+      { heading: "Georgia Towing Laws Every Macon Driver Should Know", body: `The Georgia Move Over Law (O.C.G.A. 40-6-16) requires drivers to move over one lane when approaching a stationary vehicle with flashing lights, including tow trucks, and to slow down when a lane change is unsafe. This keeps operators safe on I-75, I-16, I-475, and busy Macon streets.
+
+For nonconsensual towing from private property, Georgia law sets maximum fees and requires proper signage before a vehicle can be removed. Tow companies must follow state procedures for notification, billing, and storage. When you are towed, you have the right to an itemized statement of charges.
+
+You also have the right to choose your towing company after most accidents and breakdowns unless law enforcement specifically directs the tow. You are never required to use a company simply because it arrived first or was called by a third party.` },
+      { heading: "What to Do When Your Car Breaks Down in Macon", body: `Safety first. Signal, ease to the shoulder or a parking lot, and turn on hazard lights. On I-75 or I-16, stay in the vehicle with your seatbelt fastened while waiting if traffic is moving; standing near fast traffic is more dangerous. Note the nearest exit number or mile marker.
+
+Call (478) 500-8118 and give dispatch your location, vehicle color and type, and what happened. Lock the doors and do not accept help from unverified passersby. If you can, collect insurance and registration documents before the truck arrives so the process stays simple.
+
+While you wait, take photos of the vehicle and any damage for your records. These help with insurance documentation later.` },
+      { heading: "What to Do If Your Car Was Towed", body: `First, find where it went. Ask the property owner, nearby business, or local police; most nonconsensual tows are logged with law enforcement. Collect your driver's license, registration, and proof of insurance before going to the lot.
+
+Ask for a written, itemized list of fees and compare against Georgia's maximums for nonconsensual tows. Retrieve the vehicle as soon as possible because daily storage fees accumulate. Inspect the vehicle for new damage before leaving, photograph anything unusual, and keep all receipts for insurance or a legal dispute.` },
+      { heading: "How to Choose a Reliable Towing Company in Macon", body: `A trusted Macon towing company has a real local address, proper licensing and insurance, transparent pricing, and live 24/7 dispatchers. All Hours Towing operates from 450 Martin Luther King Jr. Blvd in Macon and answers every call with a real person.
+
+Check reviews before you are stranded. All Hours Towing holds a 4.9-star rating from 127 reviews. Avoid companies that quote vague prices, route you to out-of-state call centers, or refuse to confirm the final cost before dispatch. A local operator with a maintained fleet protects your vehicle and your wallet.` },
+      { heading: "Insurance, Payment & Reimbursement for Towing", body: `Many auto policies include towing or roadside coverage. We bill directly to major carriers such as State Farm, GEICO, Progressive, Allstate, and USAA in most cases. Roadside plans through AAA, manufacturer programs like Ford Roadside and ToyotaCare, and some credit cards also reimburse towing.
+
+Keep the itemized invoice and before-and-after photos for reimbursement. Document where the vehicle was picked up and dropped off. Our receipts include the details adjusters need, and we can help walk you through the claim.` }
+    ],
+    faqs: [
+      { question: "How much does a tow cost in Macon?", answer: "A standard local tow in Macon-Bibb County usually starts around $75 to $125 for hookup, with most in-town trips finishing between $100 and $175. Flatbed, after-hours, highway recovery, and winching can add a fair premium. We always quote the full price before dispatch." },
+      { question: "What are Georgia's towing laws I should know?", answer: "The Move Over Law requires you to move over for tow trucks and other vehicles with flashing lights. Nonconsensual tows from private property have maximum fee protections and signage rules, and you generally have the right to choose your towing company unless law enforcement directs otherwise." },
+      { question: "What should I do immediately after a breakdown on I-75?", answer: "Move safely to the shoulder, turn on hazard lights, stay in your vehicle with your seatbelt on, and note the nearest mile marker or exit number. Call All Hours Towing at (478) 500-8118 and share your exact location, vehicle type, and what happened." },
+      { question: "Can I choose my own towing company after an accident?", answer: "Yes, in most cases you have the right to choose your towing company unless law enforcement specifically directs the tow. You are never required to use a company just because it arrived first or was called by a third party." },
+      { question: "What should I bring to retrieve a towed vehicle?", answer: "Bring your driver's license, registration, and proof of insurance. Request an itemized list of fees, compare against Georgia's maximums for nonconsensual tows, and retrieve the vehicle quickly to limit daily storage charges." },
+      { question: "Do you bill insurance directly for towing?", answer: "Yes. We bill directly to most major carriers including State Farm, GEICO, Progressive, Allstate, and USAA, and we provide the itemized invoices and photos adjusters need for reimbursement." }
+    ]
+  },
+  default: {
+    longTitle: "",
+    subtitle: "",
+    longDescription: ``,
+    faqs: []
+  }
+};
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const serviceInfo = serviceSlugs[service.slug] || serviceSlugs.default;
+
+const serviceToHubGuide: Record<string, { slug: string; title: string }> = {
+  'emergency-towing': { slug: 'emergency-towing-macon-ga', title: '24/7 Emergency Towing' },
+  '24-7-towing': { slug: 'emergency-towing-macon-ga', title: '24/7 Emergency Towing' },
+  'accident-recovery': { slug: 'emergency-towing-macon-ga', title: '24/7 Emergency Towing' },
+  'roadside-assistance': { slug: 'roadside-assistance-macon-ga', title: 'Roadside Assistance Macon GA' },
+  'car-lockout-service': { slug: 'roadside-assistance-macon-ga', title: 'Roadside Assistance Macon GA' },
+  'cheap-towing': { slug: 'cheap-towing-macon-ga', title: 'Cheap Towing Macon GA' },
+  'long-distance-towing': { slug: 'towing-services-macon-ga', title: 'Towing Services Macon GA' },
+  'flatbed-towing': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'motorcycle-towing': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'ev-towing-macon-ga': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'medium-duty-towing': { slug: 'flatbed-specialty-towing-macon-ga', title: 'Flatbed & Specialty Towing' },
+  'service-areas': { slug: 'service-areas-cities-macon-ga', title: 'Service Areas & Cities' },
+  'macon-towing-guide': { slug: 'towing-company-guide-macon-ga', title: 'Towing Company Guide & Rates' },
+};
+
+const hubGuide = serviceToHubGuide[service.slug];
+const serviceSpecificTitle = `${service.title} in Macon GA | All Hours Towing | (478) 500-8118`;
+const pageTitle = serviceInfo.longTitle || serviceSpecificTitle;
+const pageDescription = `${service.description} 24/7 in Macon, Warner Robins & Byron. Call (478) 500-8118.`;
+
+---
+
+<MainLayout 
+  title={pageTitle}
+  description={pageDescription}
+>
+  <section class="section bg-towing-dark text-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{service.title}</h1>
+        <p class="text-xl text-gray-300 mb-8">
+          {serviceInfo.subtitle}
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="tel:+14785008118" class="btn-primary">
+            <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            Call (478) 500-8118
+          </a>
+          <a href="tel:+14785008118" class="btn-primary bg-green-600 hover:bg-green-700">
+            <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            Call (478) 500-8118
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold mb-6">Professional {service.title} You Can Trust</h2>
+          <p class="text-towing-gray text-lg mb-6">
+            At All Hours Towing, we pride ourselves on providing professional {service.title.toLowerCase()}. 
+            Our trained technicians use state-of-the-art equipment to ensure the job is done right the first time.
+          </p>
+          <p class="text-towing-gray mb-6">
+            Whether you're dealing with a breakdown on I-75 near Macon, locked out of your vehicle in Warner Robins, 
+            or need urgent assistance anywhere in our service area, our team is ready to help. We understand 
+            that vehicle emergencies are stressful, which is why we prioritize fast response times and 
+            transparent communication.
+          </p>
+          
+                    {/* Service-Specific Long-Form Content */}
+          {serviceInfo.longDescription && (
+            <div class="prose max-w-none mb-8">
+              {serviceInfo.longDescription.split('\n\n').filter(p => p.trim()).map(paragraph => (
+                <p class="text-towing-gray mb-4">{paragraph.trim()}</p>
+              ))}
+            </div>
+          )}
+
+          {serviceInfo.sections && serviceInfo.sections.map((section) => (
+            <div class="mb-8">
+              <h2 class="text-xl md:text-2xl font-bold mb-3">{section.heading}</h2>
+              {section.body.split('\n\n').filter(p => p.trim()).map(paragraph => (
+                <p class="text-towing-gray mb-4">{paragraph.trim()}</p>
+              ))}
+            </div>
+          ))}
+
+          <h3 class="text-xl font-bold mb-4 mt-8">Our Commitment to Quality</h3>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-towing-red mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <div>
+                <strong>Fast Response Times</strong>
+                <p class="text-towing-gray text-sm mt-1">20-35 minute average response across our service area</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-towing-red mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <div>
+                <strong>Professional & Experienced Team</strong>
+                <p class="text-towing-gray text-sm mt-1">Certified technicians with 30+ years combined experience</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-towing-red mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <div>
+                <strong>24/7 Live Dispatcher</strong>
+                <p class="text-towing-gray text-sm mt-1">Real person answers every call, anytime</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-towing-red mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <div>
+                <strong>Modern Equipment</strong>
+                <p class="text-towing-gray text-sm mt-1">Latest towing and recovery technology for safe service</p>
+              </div>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-towing-red mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <div>
+                <strong>Affordable & Transparent Pricing</strong>
+                <p class="text-towing-gray text-sm mt-1">Competitive rates with no hidden fees or surprise charges</p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Service Area Coverage -->
+          <!-- Service Area Coverage -->
+          <h3 class="text-xl font-bold mb-4 mt-8">Our Service Area</h3>
+          <p class="text-towing-gray mb-4">
+            We provide {service.title.toLowerCase()} throughout Macon and Middle Georgia, including:
+          </p>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-6">
+            <a href="/locations/macon" class="text-towing-red hover:underline">Macon</a>
+            <a href="/locations/warner-robins" class="text-towing-red hover:underline">Warner Robins</a>
+            <a href="/locations/byron" class="text-towing-red hover:underline">Byron</a>
+            <span>Macon-Bibb</span>
+            <span>Lizella</span>
+            <span>Payne City</span>
+          </div>
+
+          {hubGuide && (
+            <div class="mt-8 bg-towing-dark text-white rounded-lg p-6">
+              <h3 class="text-xl font-bold mb-2">Explore the Full {hubGuide.title} Guide</h3>
+              <p class="text-gray-300 mb-4">Deep dive into costs, laws, safety tips and how to choose — all in one place.</p>
+              <a href={`/guides/${hubGuide.slug}`} class="inline-block bg-towing-red text-white font-bold px-5 py-3 rounded-lg">Read {hubGuide.title}</a>
+            </div>
+          )}
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <div class="bg-gray-50 rounded-lg p-6 sticky top-4">
+            <h3 class="text-xl font-bold mb-4">Need {service.title} Now?</h3>
+            <p class="text-towing-gray mb-6">Our team is standing by 24/7 to assist you.</p>
+            <div class="space-y-3">
+              <a href="tel:+14785008118" class="btn-primary block text-center">
+                <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                Macon: (478) 500-8118
+              </a>
+              <a href="tel:+14785008118" class="btn-primary block text-center bg-green-600 hover:bg-green-700">
+                <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                Warner Robins: (478) 500-8118
+              </a>
+            </div>
+            <hr class="my-6 border-gray-200" />
+            <div class="text-center">
+              <p class="text-sm text-towing-gray mb-2">Need immediate help?</p>
+              <a href="/contact" class="text-towing-red font-medium hover:underline">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Services & Locations -->
+  <section class="section bg-gray-50">
+    <div class="container">
+      <h2 class="text-2xl font-bold text-center mb-6">Related Towing Services & Locations</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-center">
+        <a href="/services/emergency-towing" class="text-towing-red hover:underline">Emergency Towing</a>
+        <a href="/services/roadside-assistance" class="text-towing-red hover:underline">Roadside Assistance</a>
+        <a href="/services/flatbed-towing" class="text-towing-red hover:underline">Flatbed Towing</a>
+        <a href="/services/medium-duty-towing" class="text-towing-red hover:underline">Medium Duty</a>
+        <a href="/locations/macon" class="text-towing-red hover:underline">Macon Towing</a>
+        <a href="/locations/warner-robins" class="text-towing-red hover:underline">Warner Robins</a>
+      </div>
+    </div>
+  </section>
+
+  {serviceInfo.faqs.length > 0 && (
+    <section class="section bg-white">
+      <div class="container">
+        <h2 class="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <FAQSchema faqs={serviceInfo.faqs} />
+        <div class="max-w-3xl mx-auto space-y-6">
+          {serviceInfo.faqs.map((faq, index) => (
+            <div class="border border-gray-200 rounded-lg p-6">
+              <h3 class="font-bold text-lg mb-2">Q: {faq.question}</h3>
+              <p class="text-towing-gray">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="section bg-towing-dark text-white">
+    <div class="container text-center">
+      <h2 class="text-2xl font-bold mb-4">Ready for Fast, Professional {service.title}?</h2>
+      <p class="text-gray-300 mb-6">We're available 24/7 to help. Don't wait - call the experts now.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="tel:+14785008118" class="btn-primary">Call (478) 500-8118</a>
+        <a href="tel:+14785008118" class="btn-primary bg-green-600 hover:bg-green-700">Call (478) 500-8118</a>
+      </div>
+    </div>
+  </section>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": `${service.title} – Macon, GA`,
+  "description": service.fullDescription,
+  "provider": {
+    "@type": "AutoTowingService",
+    "name": "All Hours Towing Macon GA",
+    "telephone": "+1-478-500-8118",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "450 Martin Luther King Jr. Blvd",
+      "addressLocality": "Macon",
+      "addressRegion": "GA",
+      "postalCode": "31201",
+      "addressCountry": "US"
+    }
+  },
+  "serviceType": service.title,
+  "areaServed": [
+    { "@type": "City", "name": "Macon" },
+    { "@type": "City", "name": "Warner Robins" },
+    { "@type": "City", "name": "Byron" }
+  ]
+})} />
+</MainLayout>

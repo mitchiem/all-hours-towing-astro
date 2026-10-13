@@ -1,0 +1,30 @@
+---
+interface Props {
+  serviceName?: string;
+  serviceDescription?: string;
+
+}
+
+const { serviceName, serviceDescription} = Astro.props;
+
+const serviceSchema = serviceName ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": serviceName,
+  "description": serviceDescription,
+  "provider": {
+    "@type": "AutoTowingService",
+    "name": "All Hours Towing Macon GA",
+    "telephone": "+1-478-500-8118",
+    "url": "https://allhourstowingmaconga.com"
+  },
+  "areaServed": ["Macon", "Warner Robins", "Warner Robins", "Milledgeville", "Middle Georgia", "South Atlanta"],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://allhourstowingmaconga.com",
+    "servicePhone": "+1-478-500-8118"
+  }
+} : null;
+---
+
+{serviceSchema && <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />}

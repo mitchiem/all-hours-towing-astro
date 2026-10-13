@@ -1,0 +1,153 @@
+---
+const serviceAreaCities = [
+  { name: 'Macon', slug: 'macon' },
+  { name: 'Warner Robins', slug: 'warner-robins' },
+  { name: 'Byron', slug: 'byron' },
+];
+
+const navLinks = [
+  { name: 'Home', href: '/' },
+  {
+    name: 'Services',
+    href: '/services',
+    dropdown: [
+      { name: '24/7 Emergency Towing', href: '/services/emergency-towing' },
+      { name: 'Roadside Assistance', href: '/services/roadside-assistance' },
+      { name: 'Flatbed Towing', href: '/services/flatbed-towing' },
+      { name: 'Medium Duty Towing', href: '/services/medium-duty-towing' },
+      { name: 'Cheap Towing', href: '/services/cheap-towing' },
+      { name: 'Motorcycle Towing', href: '/services/motorcycle-towing' },
+      { name: 'Accident Recovery', href: '/services/accident-recovery' },
+      { name: 'Car Lockout Service', href: '/services/car-lockout-service' },
+      { name: 'Long Distance Towing', href: '/services/long-distance-towing' },
+      { name: '24/7 Towing', href: '/services/24-7-towing' },
+      { name: 'EV Towing Guide', href: '/services/ev-towing-macon-ga' },
+      { name: 'Service Areas', href: '/services/service-areas' },
+      { name: 'Macon Towing Guide', href: '/services/macon-towing-guide' },
+    ],
+  },
+  { name: 'Locations', href: '/locations', dropdown: 'locations' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
+  { name: 'FAQ', href: '/faq' },
+  { name: 'Guides', href: '/guides' },
+];
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-20">
+      <a href="/" class="flex items-center">
+        <img
+          src="/all-hours-towing-macon-ga-logo.webp"
+          alt="All Hours Towing Macon GA - 24/7 Towing & Roadside Assistance Logo"
+          width={250}
+          height={29}
+          loading="eager"
+          class="h-8 w-auto"
+        />
+      </a>
+
+      <!-- Desktop Navigation with Dropdowns -->
+      <nav class="desktop-nav">
+        {navLinks.map((link) => (
+          link.dropdown ? (
+            <div class="dropdown relative">
+              <button class="flex items-center gap-1 px-3 py-2 text-gray-700 hover:text-towing-red font-medium transition-colors">
+                {link.name}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {link.name === 'Locations' ? (
+                <div class="dropdown-panel">
+                  <div class="dropdown-grid">
+                    <div>
+                      <h3 class="dropdown-header">Service Areas</h3>
+                      <ul class="dropdown-list">
+                        {serviceAreaCities.map((city) => (
+                          <li><a href={`/locations/${city.slug}`}>{city.name}</a></li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <a href="/locations" class="dropdown-footer">View All Locations</a>
+                </div>
+              ) : (
+                <div class="dropdown-panel">
+                  <ul class="dropdown-list">
+                    {link.dropdown.map((item) => (
+                      <li><a href={item.href}>{item.name}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium transition-colors"
+            >
+              {link.name}
+            </a>
+          )
+        ))}
+      </nav>
+
+      <div class="desktop-actions">
+        <a href="tel:+14785008118" class="btn-primary">
+          Call (478) 500-8118
+        </a>
+      </div>
+
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="container mx-auto px-4 py-4">
+      <nav class="flex flex-col space-y-2">
+        <a href="/" class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium rounded">Home</a>
+
+        <details class="group">
+          <summary class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium cursor-pointer list-none flex items-center justify-between">
+            Services
+            <svg class="w-4 h-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="pl-4 py-2 space-y-1">
+            {navLinks.find(l => l.name === 'Services')?.dropdown?.map((item) => (
+              <a href={item.href} class="block px-3 py-2 text-sm text-gray-600 hover:text-towing-red rounded">{item.name}</a>
+            ))}
+          </div>
+        </details>
+
+        <a href="/locations" class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium rounded">Locations</a>
+        <a href="/about" class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium rounded">About</a>
+        <a href="/contact" class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium rounded">Contact</a>
+        <a href="/faq" class="px-3 py-2 text-gray-700 hover:text-towing-red font-medium rounded">FAQ</a>
+
+        <hr class="my-2 border-gray-200" />
+
+        <a href="tel:+14785008118" class="btn-primary text-center">
+          Call (478) 500-8118
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('open');
+  });
+</script>

@@ -1,0 +1,171 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalURL?: string;
+  ogImage?: string;
+  schema?: object;
+}
+
+const {
+  title,
+  description = "24/7 Towing & Recovery in Macon, Warner Robins & Byron. All Hours Towing Macon GA provides fast, reliable emergency towing and roadside assistance. 15-minute average arrival. Call now!",
+  canonicalURL = Astro.url.href,
+  ogImage = "/og-image.webp"
+} = Astro.props;
+
+const origin = new URL(canonicalURL).origin;
+const ogImageAbs = ogImage?.startsWith("http") ? ogImage : `${origin}${ogImage}`;
+const logoAbs = ogImageAbs;
+
+const siteName = "All Hours Towing Macon GA";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoTowingService",
+  "name": "All Hours Towing Macon GA",
+  "description": "24/7 emergency towing, roadside assistance, medium duty & flatbed towing. Serving Macon, Warner Robins & Byron GA. 15-min average arrival. 4.9 stars (127 reviews).",
+  "url": "https://allhourstowingmaconga.com",
+  "telephone": "+1-478-500-8118",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "450 Martin Luther King Jr. Blvd",
+    "addressLocality": "Macon",
+    "addressRegion": "GA",
+    "postalCode": "31201",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 32.8355,
+    "longitude": -83.6254
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  ],
+  "areaServed": [
+    { "@type": "City", "name": "Macon" },
+    { "@type": "City", "name": "Warner Robins" },
+    { "@type": "City", "name": "Byron" }
+  ],
+  "image": "https://allhourstowingmaconga.com/og-image.webp",
+  "logo": "https://allhourstowingmaconga.com/og-image.webp",
+  "sameAs": [
+    "https://www.facebook.com/allhourstowingmaconga",
+    "https://maps.google.com/?cid=placeholder"
+  ],
+  "priceRange": "$$",
+  "keywords": "towing Macon GA, emergency towing, roadside assistance, flatbed towing, medium duty towing, 24/7 towing, Warner Robins towing, Byron towing"
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://allhourstowingmaconga.com",
+  "name": "All Hours Towing Macon GA"
+};
+
+const breadcrumbList: Array<{ '@type': string; position: number; name: string; item: string }> = [
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://allhourstowingmaconga.com/"
+  }
+];
+
+// Generate breadcrumbs from URL pathname
+const pathSegments = Astro.url.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+let cumulativePath = '';
+for (let i = 0; i < pathSegments.length; i++) {
+  cumulativePath += '/' + pathSegments[i];
+  const segmentName = pathSegments[i].replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+  breadcrumbList.push({
+    "@type": "ListItem",
+    "position": i + 2,
+    "name": segmentName,
+    "item": `https://allhourstowingmaconga.com${cumulativePath}`
+  });
+}
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbList
+};
+
+function generateBreadcrumb(name: string, path: string, position: number) {
+  return {
+    "@type": "ListItem",
+    "position": position,
+    "name": name,
+    "item": `https://allhourstowingmaconga.com${path}`
+  };
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NKEWW8S835"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NKEWW8S835');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {Astro.props.schema && <script type="application/ld+json" set:html={JSON.stringify(Astro.props.schema)} />}
+    
+    <title>{title}</title>
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <slot />
+  </body>
+</html>

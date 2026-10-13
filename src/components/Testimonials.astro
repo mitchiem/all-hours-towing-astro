@@ -1,0 +1,53 @@
+---
+const testimonials = [
+  {
+    id: 1,
+    name: 'Sarah Johnson',
+    location: 'Warner Robins, GA',
+    content: 'All Hours\'s team responded incredibly fast when my car broke down on I-20. They were professional, friendly, and took great care with my vehicle.'
+  },
+  {
+    id: 2,
+    name: 'Michael Thompson',
+    location: 'Macon, GA',
+    content: 'Had a terrible situation with my truck stuck in mud after heavy rain. The recovery team came fully prepared and got me out quickly without any damage.'
+  },
+  {
+    id: 3,
+    name: 'Jennifer Davis',
+    location: 'McDonough, GA',
+    content: 'Their roadside assistance saved me when I had a flat tire late at night. The driver was so helpful and even made sure I got home safely.'
+  },
+  {
+    id: 4,
+    name: 'Robert Wilson',
+    location: 'Macon, GA',
+    content: 'Used All Hours\'s service for transporting my classic car to a show. They took exceptional care and treated it like their own.'
+  }
+];
+---
+
+<section class="section bg-gray-50">
+  <div class="container">
+    <div class="section-title">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Customers Love Us</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {testimonials.map((testimonial) => (
+        <div class="bg-white rounded-lg p-6 shadow-soft">
+          <div class="flex mb-3">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            ))}
+          </div>
+          <p class="text-towing-gray mb-6">"{testimonial.content}"</p>
+          <div>
+            <p class="font-bold">{testimonial.name}</p>
+            <p class="text-sm text-towing-gray">{testimonial.location}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

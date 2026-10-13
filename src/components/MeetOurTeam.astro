@@ -1,0 +1,36 @@
+---
+import { teamMembers } from '../data/teamMembers';
+---
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold mb-4">Meet Our Team</h2>
+      <p class="text-towing-gray max-w-3xl mx-auto">
+        Our Family Has Been Proudly Serving South Atlanta and Middle Georgia for 3 Generations!
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      {teamMembers.map((member) => (
+        <div class="bg-white rounded-lg overflow-hidden shadow-soft">
+          <div class="h-64 overflow-hidden">
+            <img 
+              src={member.image} 
+              alt={`${member.name} - ${member.position} at All Hours Towing`}
+              class="w-full h-full object-cover"
+              width={400}
+              height={256}
+              loading="lazy"
+            />
+          </div>
+          <div class="text-center p-4">
+            <h3 class="font-bold text-lg">{member.name}</h3>
+            <p class="text-towing-gray text-sm">{member.position}</p>
+            <p class="text-towing-gray text-xs mt-1">{member.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

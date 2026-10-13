@@ -1,0 +1,550 @@
+---
+import MainLayout from '../../../layouts/MainLayout.astro';
+import { allCities } from '../../../data/cities';
+import { services } from '../../../data/services';
+
+export function getStaticPaths() {
+  return allCities.map((city) => ({
+    params: { city: city.slug },
+    props: { city }
+  }));
+}
+
+const { city } = Astro.props;
+
+const cityServiceContent: Record<string, { keywords: string; localInfo: string }> = {
+  'macon': {
+    keywords: 'Macon towing, Macon roadside assistance, Bibb County tow truck, 24/7 towing Macon GA',
+    localInfo: `Macon is the heart of Middle Georgia and the headquarters of All Hours Towing. Our central location at 450 Martin Luther King Jr. Blvd places us just minutes from anywhere in Macon-Bibb County. We serve the entire metro area, from the historic neighborhoods of Ingleside and Vineville to the commercial corridors of Eisenhower Parkway and Riverside Drive.
+
+The Macon-Bibb area is crisscrossed by major highways: I-75 runs north-south through the heart of the city, connecting Macon to Atlanta (80 miles north) and Valdosta (130 miles south). I-16 begins in Macon and runs east to Savannah. I-475 forms a western bypass around the city. These interstates generate heavy commuter and freight traffic daily—and when a breakdown happens on the shoulder, our response time averages 15 minutes.
+
+Local landmarks include the Ocmulgee Mounds National Historical Park, a 2,000-year-old Native American site that draws visitors from across the Southeast. The Cherry Blossom Festival each March brings over 200,000 visitors to Macon, filling streets with pedestrian traffic and out-of-town vehicles. We pre-stage trucks during festival weekends to maintain fast response times. Mercer University, Navicent Health (the region's largest hospital), the Macon Coliseum, and the Tubman Museum are all within our 15-minute response radius.
+
+Macon-Bibb has a mix of urban, suburban, and rural roads. Narrow historic streets in downtown Macon require flatbed towing for low-clearance vehicles. The Ocmulgee River lowlands experience occasional flooding after heavy rains, and our winch-equipped trucks can recover vehicles caught on soft ground or standing water. From the busy I-75/I-16 interchange (exit 165) to the quiet country roads of Lizella and Payne City, our drivers know every shortcut and every safe pull-off.`
+  },
+  'warner-robins': {
+    keywords: 'Warner Robins towing, Warner Robins roadside assistance, Houston County tow truck, Robins AFB towing',
+    localInfo: `Warner Robins is Middle Georgia's second-largest city and home to Robins Air Force Base, one of Georgia's largest employers. All Hours Towing provides fast, reliable towing and roadside assistance throughout Warner Robins and Houston County from our Macon headquarters, just 20 miles away via I-75 and GA-247.
+
+Major routes serving Warner Robins include Watson Boulevard (the city's main east-west commercial artery), Russell Parkway, GA-247, and GA-96. I-75 runs just west of the city, providing rapid access to Macon and points south. The Russell Parkway / Watson Boulevard corridor sees heavy commuter traffic during shift changes at Robins AFB, and the Museum of Aviation draws military history enthusiasts from across the country.
+
+Local landmarks include the Museum of Aviation, the Houston Medical Center, and the Galleria Mall area. The base housing developments and surrounding neighborhoods require quick response times, and our drivers know every gate, restricted road, and alternative route on and around Robins AFB. Whether you're stranded on a side road in Eagle Springs or need a tow from the Walmart parking lot on Watson Boulevard, we'll be there in 15-20 minutes.`
+  },
+  'byron': {
+    keywords: 'Byron towing, Byron roadside assistance, Peach County tow truck, I-75 breakdown Byron GA',
+    localInfo: `Byron is a growing community in Peach County, known as the "Gateway to the Peach County" and famous for the Big Peach landmark visible from I-75. All Hours Towing serves Byron with 24/7 emergency towing and roadside assistance from our Macon base, just 12 miles away via I-75.
+
+I-75 is Byron's main artery, with exits 146 and 149 providing access to the city. Traffic along I-75 through Byron is a mix of long-haul freight, vacationers heading to Florida, and local commuters. US-41 runs parallel to the interstate, and GA-49 connects Byron to Fort Valley and Macon. These routes see their share of breakdowns, especially during summer heat when batteries fail and tires blow out on the hot asphalt.
+
+Landmarks include North Peach Park, the Peach County High School, and the iconic Big Peach fruit stand. The surrounding rural areas of Peach County feature winding farm roads where vehicles can end up in ditches after dark, and our winch-equipped trucks can handle any off-road recovery. Whether you need a jumpstart at a gas station off exit 149 or emergency towing after a fender-bender on US-41, we'll get to you fast.`
+  }
+};
+const whyChooseContent: Record<string, string[]> = {
+  'macon': [
+    "Serving Bibb County since 1960 — third-generation family business",
+    "Nearest truck staged near downtown Macon for rapid response",
+    "I-75, I-16, and I-475 specialists — we know every exit",
+    "Pre-staged trucks during Cherry Blossom Festival and Macon Centreplex events",
+    "Navicent Health and Mercer University area coverage — 24/7"
+  ],
+  'warner-robins': [
+    "Robins AFB-area specialists — we know Watson Blvd, Russell Pkwy, GA-247",
+    "Museum of Aviation and Houston Mall coverage with fast response",
+    "Houston County's busiest corridors covered 24/7",
+    "Base traffic patterns during shift changes — we know the flow",
+    "Family owned since 1960, trusted by military families"
+  ],
+  'centerville': [
+    "Houston Lake Rd and GA-41 experts — Centerville's main arteries",
+    "Galleria Mall area commercial hub coverage for lockouts and jumpstarts",
+    "Situated between Warner Robins and Macon for rapid dual-city response",
+    "Thomson Middle School zone — safe, careful service near school traffic",
+    "Third-generation family business serving Houston County"
+  ],
+  'byron': [
+    "I-75 exit 149 specialists — we know that interchange blind spots",
+    "The Big Peach landmark and Peach County High coverage 24/7",
+    "Peach County's nearest heavy-duty recovery crew",
+    "Serving Byron, Peach Crossing, and the Peach County industrial park",
+    "Family-run operation with deep roots in Middle Georgia"
+  ],
+  'perry': [
+    "Georgia National Fairgrounds pre-staging during major events and rodeos",
+    "I-75 exits 135-136 commute corridor specialists — daily coverage",
+    "Go Fish Education Center area and rural approach roads covered",
+    "Houston County's agricultural hub — farm equipment recovery when needed",
+    "Since 1960, family-run towing with local Perry knowledge"
+  ],
+  'gray': [
+    "Jones County Courthouse area and GA-18 corridor specialists",
+    "Commuter traffic on GA-18 to Macon covered during rush hours",
+    "Rural Round Oak and Haddock communities — true isolated recovery",
+    "Jarrell Plantation area — we know the roads with limited cell service",
+    "Family-owned since 1960, serving Jones County for three generations"
+  ],
+  'forsyth': [
+    "Monroe County Courthouse and historic downtown coverage",
+    "I-75 exits 185-188 rest-stop corridor — we handle traveler breakdowns",
+    "Tift College and conference center traffic patterns tracked",
+    "High Falls State Park steep approach roads — recovery specialists",
+    "Third-generation family business, local Monroe County knowledge"
+  ],
+  'milledgeville': [
+    "Georgia College & State University campus coverage during move-in weeks",
+    "Lake Sinclair boaters — trailer roadside assistance at launch ramps",
+    "Historic Central State Hospital campus — aging road navigation experts",
+    "US-441 corridor through Baldwin County covered 24/7",
+    "Family-run since 1960 with Milledgeville-specific local knowledge"
+  ],
+  'covington': [
+    "Historic Downtown Square event traffic — pre-staged trucks",
+    "I-20 exits 92-93 commute corridor specialists for Atlanta-bound workers",
+    "Alcovy River flood-prone roads — we know the low-water crossings",
+    "Emory at Oxford academic-season traffic patterns tracked",
+    "Third-generation family towing in Newton County since 1960"
+  ],
+  'conyers': [
+    "Georgia International Horse Park event coverage — year-round",
+    "Olde Town Conyers narrow historic streets — careful recovery",
+    "I-20 freight corridor tractor-trailer recovery with law enforcement coordination",
+    "Monastery of the Holy Spirit rural area coverage — long-isolation towing",
+    "Rockdale Medical Center patient and visitor roadside assistance"
+  ],
+  'oxford': [
+    "Oxford College of Emory University campus coverage",
+    "I-20 corridor access through GA-81 — quick highway response",
+    "Dried Indian Creek area and rural Newton County roads",
+    "Historic Oxford campus and Williams Gymnasium traffic"
+  ],
+  'porterdale': [
+    "Yellow River Park and Historic District coverage",
+    "GA-81 corridor and I-20 nearby access",
+    "Mill Village and North Porterdale neighborhoods covered",
+    "Newton County's tight-knit mill community — we know everyone",
+    "Family-owned since 1960, true local service"
+  ],
+  'social-circle': [
+    "Social Circle Historic District and downtown area specialists",
+    "Blue Willow Inn and Social Circle Theater area coverage",
+    "I-20 nearby access and GA-11/GA-229 corridors",
+    "Walton County's railroad town — we know the quiet streets",
+    "Third-generation family business serving Walton County"
+  ],
+  'mansfield': [
+    "Historic Carmichael House and Mansfield District coverage",
+    "GA-11 corridor through rural Newton County",
+    "I-20 nearby for quick highway recovery",
+    "East Mansfield and surrounding countryside — rapid response",
+    "Family-run since 1960, Mansfield local knowledge"
+  ],
+  'monroe': [
+    "Walton County Courthouse square event coverage",
+    "Piedmont Walton Hospital emergency room vehicle recovery",
+    "US-78 Atlanta-Athens connector specialists — heavy truck traffic aware",
+    "GA-11 Broad Street residential section — tight driveway recovery",
+    "Alcovy River flood zone — safety-first approach"
+  ],
+  'loganville': [
+    "Loganville Town Center and Bay Creek Park coverage",
+    "US-78 and GA-20 corridors across Walton and Gwinnett counties",
+    "Laurel Mist, Cedar Ridge, Bay Creek neighborhoods — rapid response",
+    "Suburban Atlanta corridor — fast ETA from Warner Robins center"
+  ],
+  'newborn': [
+    "Historic Newborn District and United Methodist Church area",
+    "GA-142 and GA-229 rural corridors covered",
+    "Small-town Newton County recovery with personal touch",
+    "Surrounding countryside — we know the back roads"
+  ],
+  'bonaire': [
+    "GA-96 and GA-247 corridors south of Warner Robins",
+    "Southfield Plantation and Kathleen area coverage",
+    "Big Indian Creek area and rural Houston County roads",
+    "Suburban-commuter traffic to Robins AFB — daily patterns managed"
+  ],
+  'fort-valley': [
+    "Fort Valley State University campus coverage",
+    "GA-49 and GA-96 corridors — Peach County's main arteries",
+    "Massee Lane Gardens and Peach County High School area",
+    "US-341 corridor through Peach County covered",
+    "Family-run towing with Peach County roots since 1960"
+  ],
+  'lizella': [
+    "Lake Tobesofkee recreation area — lake road recovery",
+    "GA-74 and I-475 corridor — Bibb County west side",
+    "Skipper Road and Tobesofkee area neighborhoods covered",
+    "Macon headquarters proximity — fast dispatch to Lizella"
+  ],
+  'roberta': [
+    "Crawford County Courthouse and Roberta Depot area",
+    "US-341 and US-80 corridors through rural Crawford County",
+    "Macon headquarters only 16 miles — rapid response",
+    "Crawford County High School zone — safe school traffic handling"
+  ],
+  'jeffersonville': [
+    "Twiggs County Courthouse and I-16 corridor specialists",
+    "US-80 and GA-96 through rural Twiggs County",
+    "Ocmulgee River area — flood-prone road awareness",
+    "Downtown Jeffersonville and North Jeffersonville coverage"
+  ],
+  'dry-branch': [
+    "Twiggs County rural recovery — US-80 and GA-96 corridors",
+    "I-16 nearby access for through-traveler breakdowns",
+    "Dry Branch Township and surrounding countryside — we're the nearest",
+    "Personal, family-owned towing for rural Georgia communities"
+  ],
+  'gordon': [
+    "Wilkinson County's kaolin mining area — GA-18 and GA-243 corridors",
+    "Gordon City Hall and historic Gordon State School area",
+    "Rural Middle Georgia recovery with local Wilkinson County knowledge",
+    "Family-run since 1960, serving Gordon and surrounding areas"
+  ],
+  'musella-ga': [
+    "HOME BASE — All Hours Towing headquarters on Smith Chapel Rd",
+    "Dickey Farms and Macon Baptist Church — zero-time dispatch",
+    "Crawford County's peach country — we're already here",
+    "I-75 nearby access for highway recovery from our staging yard"
+  ],
+  'jersey': [
+    "Walton County rural community — GA-138 corridor",
+    "Alcovy River area and Jersey Township coverage",
+    "Quiet country roads and family neighborhoods — safe recovery",
+    "Warner Robins center proximity for fast response"
+  ],
+  'jackson': [
+    "Butts County Courthouse and downtown Jackson coverage",
+    "High Falls State Park area — steep access road recovery",
+    "US-23 and GA-36 corridors through Butts County",
+    "Ocmulgee River area — flood awareness and personal service",
+    "Family-run towing since 1960, serving Jackson and Butts County"
+  ]
+};
+
+
+const localInfo = cityServiceContent[city.slug]?.localInfo || `We provide professional towing and recovery services throughout ${city.name} and surrounding areas.`;
+
+const isMaconArea = city.region === 'Macon Area';
+const locationDescription = `24/7 towing in ${city.name}, GA by All Hours Towing Macon GA. Fast emergency towing & roadside assistance. Call (478) 500-8118.`;
+const locationTitle = `Towing in ${city.name}, GA | All Hours Towing Macon | 24/7`;
+
+const nearbyCities = allCities.filter(c => 
+  c.slug !== city.slug && 
+  (c.region === city.region || city.nearbyLocations.includes(c.slug))
+).slice(0, 6);
+
+const localBusinessSchema = (city && ['macon','warner-robins','byron'].includes(city.slug)) ? {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "All Hours Towing Macon GA",
+  "description": `24/7 towing and roadside assistance in ${city.name}, GA. All Hours Towing Macon GA serves ${city.name} with fast, reliable emergency towing, flatbed transport, and accident recovery.`,
+  "url": `https://allhourstowingmaconga.com/locations/${city.slug}`,
+  "telephone": "+1-478-500-8118",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "450 Martin Luther King Jr. Blvd",
+    "addressLocality": "Macon",
+    "addressRegion": "GA",
+    "postalCode": "31201",
+    "addressCountry": "US"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 32.8355, "longitude": -83.6254 },
+  "areaServed": { "@type": "City", "name": city.name },
+  "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59"}]
+} : (city ? {
+  "@context": "https://schema.org",
+  "@type": "AutoTowingService",
+  "name": `All Hours Towing Macon GA - ${city.name}`,
+  "telephone": "+1-478-500-8118",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": (city.nearestServiceCenter?.address || "450 Martin Luther King Jr. Blvd").split(',')[0],
+    "addressLocality": city.name,
+    "addressRegion": "GA",
+    "addressCountry": "US"
+  },
+  "areaServed": { "@type": "City", "name": city.name },
+  "url": `https://allhourstowingmaconga.com/locations/${city.slug}`
+} : {});
+
+const locationBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://allhourstowingmaconga.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://allhourstowingmaconga.com/locations" },
+    { "@type": "ListItem", "position": 3, "name": city.name, "item": `https://allhourstowingmaconga.com/locations/${city.slug}` }
+  ]
+};
+const faqPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `How fast can you reach me in ${city.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `We stage trucks near ${city.name}'s major routes including ${city.majorRoads.join(', ')}. Average response time is 30 minutes or less throughout ${city.name} and ${city.region}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Do you provide towing on ${city.majorRoads[0]} near ${city.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Yes! We cover all highways and interstates in and around ${city.name}, including ${city.majorRoads.join(', ')}. Our trucks are stationed near key interchanges for fast dispatch.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What services do you offer in ${city.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `We provide light and medium duty towing, roadside assistance (lockouts, jumpstarts, fuel delivery), motorcycle towing, accident recovery, and disaster recovery in ${city.name} and throughout ${city.region}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Are you available 24 hours in ${city.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `Yes — our dispatchers are live 24/7/365. Call (478) 500-8118 any time day or night for immediate roadside assistance in ${city.name}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `What areas do you serve near ${city.name}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `We serve ${city.name}, ${city.region}, and surrounding communities including neighboring cities throughout the area. Our trucks are staged for fast response across the entire service area.`
+      }
+    }
+  ]
+};
+
+---
+
+<MainLayout 
+  title={locationTitle}
+  description={locationDescription}
+  schema={{"@graph": [localBusinessSchema, locationBreadcrumbSchema, faqPageSchema]}}
+>
+  <section class="section bg-towing-dark text-white">
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center">
+        <nav class="text-sm mb-4">
+          <a href="/" class="text-gray-300 hover:text-white">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/locations" class="text-gray-300 hover:text-white">Locations</a>
+          <span class="mx-2">/</span>
+          <span class="text-white">{city.name}</span>
+        </nav>
+        <p class="text-yellow-400 font-medium mb-2">{city.region}</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{city.name} Towing & Roadside Assistance – All Hours Towing</h1>
+        <p class="text-xl text-gray-300">{city.description}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold mb-6">Professional Towing in {city.name}</h2>
+          
+          {
+            localInfo.split('\n\n').filter(p => p.trim()).map(paragraph => (
+              <p class="text-towing-gray mb-4">{paragraph.trim()}</p>
+            ))
+          }
+          
+          <div class="bg-gray-50 rounded-lg p-6 mb-8">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-towing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+              Service Information
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-sm text-towing-gray">Nearest Service Center</p>
+                <p class="font-medium">{city.nearestServiceCenter.name}</p>
+                <p class="text-sm text-towing-gray">{city.nearestServiceCenter.address}</p>
+              </div>
+              <div>
+                <p class="text-sm text-towing-gray">Distance</p>
+                <p class="text-towing-red font-bold">{city.nearestServiceCenter.distance}</p>
+              </div>
+            </div>
+            <p class="text-sm text-towing-gray">
+              <strong>Major Roads:</strong> {city.majorRoads.join(', ')}
+            </p>
+          </div>
+          
+          <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Available Services in {city.name}</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {services.map((svc) => (
+                <a href={`/locations/${city.slug}/${svc.slug}`} class="bg-white border border-gray-100 rounded-lg p-4 shadow-soft hover:shadow-elevated transition-all flex items-start gap-3">
+                  <div class="w-10 h-10 bg-towing-red/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-towing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm">{svc.title}</p>
+                    <p class="text-xs text-towing-gray">{svc.description}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+          
+          <div class="space-y-4 mb-8">
+            <h3 class="text-lg font-bold">Why Choose All Hours Towing?</h3>
+            <ul class="space-y-3">
+              {whyChooseContent[city.slug] ? (
+                whyChooseContent[city.slug].map((bullet) => (
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-towing-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span class="text-towing-gray">{bullet}</span>
+                  </li>
+                ))
+              ) : (
+                <>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-towing-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span class="text-towing-gray">24/7 availability - we're always here when you need us</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-towing-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span class="text-towing-gray">Fast response times - typically 30 minutes or less</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-towing-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span class="text-towing-gray">Professional, certified technicians</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-towing-red flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span class="text-towing-gray">Modern equipment and vehicles</span>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+          <div class="prose max-w-none mb-8">
+            <h3 class="text-lg font-bold mb-3">Neighborhood Coverage & ETA in {city.name}</h3>
+            <p class="text-towing-gray mb-4">
+              We cover all of {city.name} and nearby communities including {nearbyCities.map(n => n.name).join(', ') || 'surrounding areas'}. Our trucks stage near high‑demand corridors ({city.majorRoads.join(', ')}) to keep average response near 30 minutes. Busy drive times and weather can affect ETA; we update you by phone/text while en route.
+            </p>
+            <p class="text-towing-gray">
+              For apartments, gated communities, and retail lots, please share gate codes or landmarks. If you’re roadside, move safely off the travel lane, enable hazard lights, and wait behind a barrier if available until our wrecker arrives.
+            </p>
+          </div>
+
+          <div class="bg-gray-50 rounded-lg p-6 mb-8">
+            <h3 class="text-lg font-bold mb-3">Safety on {city.majorRoads.join(', ')}</h3>
+            <p class="text-towing-gray">
+              On major roads around {city.name}, use triangles/flares if you have them and avoid standing near traffic. If police are on scene, advise them All Hours Towing is responding. We handle recovery, debris clearing, and transport to your preferred shop.
+            </p>
+          </div>
+
+          <!-- FAQ Section -->
+          <div class="mb-8" itemscope itemtype="https://schema.org/FAQPage">
+            <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions — {city.name} Towing</h2>
+            <div class="space-y-4">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-bold mb-2">How fast can you reach me in {city.name}?</h3>
+                <p class="text-towing-gray">We stage trucks near {city.name}'s major routes including {city.majorRoads.join(', ')}. Average response time is 30 minutes or less throughout {city.name} and {city.region}.</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-bold mb-2">Do you provide towing on {city.majorRoads[0]} near {city.name}?</h3>
+                <p class="text-towing-gray">Yes! We cover all highways and interstates in and around {city.name}, including {city.majorRoads.join(', ')}. Our trucks are stationed near key interchanges for fast dispatch.</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-bold mb-2">What services do you offer in {city.name}?</h3>
+                <p class="text-towing-gray">We provide light and medium duty towing, roadside assistance (lockouts, jumpstarts, fuel delivery), motorcycle towing, accident recovery, and disaster recovery in {city.name} and throughout {city.region}.</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-bold mb-2">Are you available 24 hours in {city.name}?</h3>
+                <p class="text-towing-gray">Yes — our dispatchers are live 24/7/365. Call (478) 500-8118 any time day or night for immediate roadside assistance in {city.name}.</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h3 class="font-bold mb-2">What areas do you serve near {city.name}?</h3>
+                <p class="text-towing-gray">We serve {city.name}, {city.region}, and surrounding communities including neighboring cities throughout the area. Our trucks are staged for fast response across the entire service area.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">Towing & Roadside Assistance Near {city.name}</h2>
+            <p class="text-towing-gray mb-4">
+              If you are traveling through nearby communities or need towing in neighboring areas, we serve the entire {city.region} region:
+            </p>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {nearbyCities.map((nearby) => (
+                <li>
+                  <a href={`/locations/${nearby.slug}`} class="text-towing-red hover:underline inline-flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    {nearby.name} Towing
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="lg:col-span-1">
+          <div class="bg-gray-50 rounded-lg p-6 sticky top-24">
+            <h3 class="text-xl font-bold mb-4">Call (478) 500-8118 for Towing in {city.name}</h3>
+            <p class="text-towing-gray mb-6">
+              Contact us for fast, reliable towing and recovery services.
+            </p>
+            <div class="space-y-4 mb-6">
+              <a href="tel:+14785008118" class="btn-primary w-full justify-center">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                Call (478) 500-8118
+              </a>
+              <a href="tel:+14785008118" class="btn-outline w-full justify-center">
+                Warner Robins: (478) 500-8118
+              </a>
+            </div>
+            <hr class="my-4 border-gray-300" />
+
+            <!-- Google Maps Embed -->
+            <div class="mb-6">
+              <h4 class="font-bold mb-3">Find Us — Nearest Location</h4>
+              {isMaconArea ? (
+                <iframe src="https://maps.google.com/maps?q=450%20Martin%20Luther%20King%20Jr%20Blvd%2C%20Macon%2C%20GA%2031201&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="300" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="All Hours Towing Towing - Macon Location"></iframe>
+              ) : (
+                <iframe src="https://maps.google.com/maps?q=450%20Martin%20Luther%20King%20Jr%20Blvd%2C%20Macon%2C%20GA%2031201&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="300" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="All Hours Towing Towing - Macon Location"></iframe>
+              )}
+            </div>
+
+            {nearbyCities.length > 0 && (
+              <div>
+                <h4 class="font-bold mb-3">Nearby Areas</h4>
+                <ul class="space-y-2">
+                  {nearbyCities.map((nearby) => (
+                    <li>
+                      <a href={`/locations/${nearby.slug}`} class="text-towing-red hover:underline text-sm flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        {nearby.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-gray-50">
+    <div class="container text-center">
+      <a href="/locations" class="text-towing-red font-medium hover:underline inline-flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back to All Locations
+      </a>
+    </div>
+  </section>
+</MainLayout>
